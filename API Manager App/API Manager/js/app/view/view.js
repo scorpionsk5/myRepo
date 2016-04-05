@@ -58,13 +58,13 @@
             grabcursorenabled: false,
         });
 
-        // Creating custom scroll on main container
-        this.$container.niceScroll({
-            bouncescroll: true,
-            cursorcolor: scrollBarColor,
-            autohidemode: true,
-            grabcursorenabled: false,
-        });
+        //// Creating custom scroll on main container
+        //this.$container.niceScroll({
+        //    bouncescroll: true,
+        //    cursorcolor: scrollBarColor,
+        //    autohidemode: true,
+        //    grabcursorenabled: false,
+        //});
 
         // Creating popup window to display messages
         messageWindow.kendoWindow({

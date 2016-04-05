@@ -103,7 +103,7 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
 
                 // Build a sorted list of widget properties in which data should be orderd
                 $.each(dataObj, function (key) {
-                    (!key.startsWith('_') && key != 'Type' && key != 'QueryId') && sortedList.push(key)
+                    (!(key[0] == '_') && key != 'Type' && key != 'QueryId') && sortedList.push(key)
                 });
                 sortedList.sort();
 

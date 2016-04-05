@@ -4,7 +4,7 @@ var headers=primaryLink.split('.');
 var mainNode= headers[0];
 var me=this;
 
-_.isString(dataObj) && dataObj.startsWith('_CommonDescriptions') && (dataObj=me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
+_.isString(dataObj) && (dataObj.search('_CommonDescriptions') == 0) && (dataObj=me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
 #
 
 <div>
