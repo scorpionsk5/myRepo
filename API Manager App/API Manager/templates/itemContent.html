@@ -1,0 +1,67 @@
+﻿#
+    var dataObj=data.dataObj, me=this;
+
+    if(dataObj['_extends']){
+        var stringArray = dataObj['_extends'];
+        delete dataObj['_extends'];
+        dataObj = $.extend({},me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), stringArray), dataObj);
+    }
+#
+
+    #if(data.header){#
+        #var cssClass='propertyItem';#
+        #(data.header == '_InnerFields' || data.header == '_Arguments') && (data.header = me.APIManager.getDescriptionText(data.header)) && (cssClass='')#
+        <h3 class=#=cssClass# data-name="#=data.header#">#=data.header#</h3>
+    #}#
+
+
+#if(dataObj){#
+<div class="itemContent">
+    #_.each(dataObj,function(value,key){#
+        #if(_.isObject(value) && !_.isArray(value)){#
+            #=me.templateStore.TemplateCache['templates/itemContent'].call(me,{dataObj:value, header:key})#    <br />
+        #}
+        else if(_.isString(value) && key != '_Note'){#
+            #var pathArray=value.split('.')
+            if((pathArray.length>1) && (pathArray[0]=='_CommonDescriptions')){#
+                #var commonDescriptionObject = me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), value)#
+                #=me.templateStore.TemplateCache['templates/itemContent'].call(me,{dataObj:commonDescriptionObject, header:key})#    <br />
+            #}
+            else {
+                var cssClass='',dom='h4';#
+                #(key.charAt(0)=='_') && (key=me.APIManager.getDescriptionText(key))#
+                #if(key=='Type'){
+                    dom='h3';   cssClass='propertyItem';
+                } else {key=key+':-'}#
+                <#=dom# class=#=cssClass#>#=key#</#=dom#><p>#=value#</p> <br />
+            #}#
+        #}
+        else if(_.isString(value) && key == '_Note'){#
+            <span class="noteHeader">Note: </span><span class="note"><b>#=value#</b></span>  <br />
+        #}
+        else if(_.isArray(value)){#
+            #var itemClass='';
+            if (key=='_AvailableOptions') {
+                key=me.APIManager.getDescriptionText(key)#
+                <h4>#=key+':-'#</h4>
+                <div class="itemContent">
+                    #_.each(value,function(item,index){#
+                        <span class="arrayItems">#=item#</span><br />
+                    #})#
+                </div>
+            #}
+            else {#
+                #var commonDescriptionObject = me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), value[0])#
+                #=me.templateStore.TemplateCache['templates/itemContent'].call(me,{ dataObj:commonDescriptionObject, header:key, additionalText:value })#    <br />
+            #}#
+        #}#
+    #})#
+
+    #if(data.additionalText){#
+        #for(var i=1;i < data.additionalText.length; i++){#
+            <p class="additionalInformation">#:data.additionalText[i]#</p>
+        #}#
+    #}#
+
+</div>
+#}#

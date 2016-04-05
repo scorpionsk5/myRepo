@@ -1,0 +1,109 @@
+﻿body {
+    background-color: rgb(227, 227, 227);
+}
+
+.headerContainer h1 {
+    text-align: center;
+    color: rgb(107, 107, 107);
+}
+
+.spliterPanel {
+    border-radius: 0 0 10px 10px;
+    background-color: rgb(246, 246, 246);
+    height: 700px;
+}
+
+.mainContainer {
+    padding-left: 12px;
+    padding-top: 1px;
+    color: rgb(128, 128, 128);
+    width: 78.5% !important;
+}
+
+/*.menuElement .k-sprite {
+    background-image: url(Default/sprite.png);
+}
+
+.expandable {
+    background-position: 0;
+}
+
+.nonExpandable {
+    background-position: 0;
+}*/
+
+.itemContent {
+    margin-left: 30px;
+}
+
+.arrayItems {
+    font-style: italic;
+    font-size: medium;
+}
+
+.propertyItem {
+    color: rgb(0, 148, 255);
+}
+
+.listItem {
+    width: 250px;
+    margin-bottom: 10px;
+    background-color: rgb(0, 148, 255);
+    display: block;
+    border-radius: 5px;
+    height: 20px;
+}
+
+    .listItem a {
+        color: rgb(255, 255, 255);
+        margin-left: 20px;
+    }
+
+.menuElement a {
+    color: rgb(0, 148, 255);
+    font-size: 102%;
+}
+
+
+.k-state-focused {
+    box-shadow: none;
+}
+
+.k-state-hover, k-state-hover:hover {
+    background-color: rgb(0, 148, 255) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.k-state-selected {
+    color: rgb(0, 148, 255) !important;
+    background-color: inherit !important;
+    box-shadow: inset 0 0 1px 2px rgb(0, 148, 255) !important;
+}
+
+.contentHeader {
+    color: rgb(107, 107, 107);
+}
+
+.additionalInformation {
+    margin-top: -15px;
+}
+
+.externalLink {
+    color: rgb(0, 44, 255);
+}
+
+.messageWindow {
+    color: red;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+}
+
+.k-window-title {
+    color: rgb(0, 148, 255);
+}
+
+.mainMenuElement {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}

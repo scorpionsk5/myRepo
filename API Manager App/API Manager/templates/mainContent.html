@@ -1,0 +1,24 @@
+﻿#
+var dataObj=data.dataObject, secondaryLink=data.secondaryLink,primaryLink=data.primaryLink;
+var headers=primaryLink.split('.');
+var mainNode= headers[0];
+var me=this;
+
+_.isString(dataObj) && dataObj.startsWith('_CommonDescriptions') && (dataObj=me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
+#
+
+<div>
+    <h1 class="contentHeader">#=headers[0]#</h1>
+    #if(headers.length>1){#
+    <h2 class="contentHeader">#=headers[1]#</h2>
+    #}#
+</div>
+
+#if(headers.length == 1){#
+    #_.each(dataObj,function(value,key){#
+        <span class="listItem"><a href="\\##=mainNode + '.' + key#">#=key#</a></span>
+    #})#
+#}
+else{#
+    #=me.templateStore.TemplateCache['templates/itemContent'].call(me,{dataObj:dataObj})#
+#}#
