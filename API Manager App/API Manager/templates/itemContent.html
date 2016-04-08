@@ -10,7 +10,7 @@
 
     #if(data.header){#
         #var cssClass='propertyItem';#
-        #(data.header == '_InnerFields' || data.header == '_Arguments') && (data.header = me.APIManager.getDescriptionText(data.header)) && (cssClass='')#
+        #(data.header == '_InnerFields' || data.header == '_Arguments') && (data.header = me.APIManager.APIManagerView.getDescriptionText(data.header)) && (cssClass='')#
         <h3 class=#=cssClass# data-name="#=data.header#">#=data.header#</h3>
     #}#
 
@@ -29,7 +29,7 @@
             #}
             else {
                 var cssClass='',dom='h4';#
-                #(key.charAt(0)=='_') && (key=me.APIManager.getDescriptionText(key))#
+                #(key.charAt(0)=='_') && (key=me.APIManager.APIManagerView.getDescriptionText(key))#
                 #if(key=='Type'){
                     dom='h3';   cssClass='propertyItem';
                 } else {key=key+':-'}#
@@ -42,7 +42,7 @@
         else if(_.isArray(value)){#
             #var itemClass='';
             if (key=='_AvailableOptions') {
-                key=me.APIManager.getDescriptionText(key)#
+                key=me.APIManager.APIManagerView.getDescriptionText(key)#
                 <h4>#=key+':-'#</h4>
                 <div class="itemContent">
                     #_.each(value,function(item,index){#

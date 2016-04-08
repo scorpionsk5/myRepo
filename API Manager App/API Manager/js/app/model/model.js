@@ -57,14 +57,14 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
 
                 if (_.isString(value) || _.isArray(value)) {
                     // If value is string or array then build menu item which will be data source for kendo menu or tree view
-                    menuItems = { text: me.APIManager.getDescriptionText(key), url: '#' + parentObj.join('.') };
+                    menuItems = { text: me.APIManager.APIManagerView.getDescriptionText(key), url: '#' + parentObj.join('.') };
 
                     // Remove last item from parentObj array
                     parentObj.splice(parentObj.length - 1, 1);
                 }
                 else {
                     // If 'value' is a object then call same method 'value' and 'parentObj' as an arguments
-                    menuItems = { text: me.APIManager.getDescriptionText(key), url: '#' + parentObj.join('.'), items: modelUtils.buildMenuItems.call(me, value, parentObj) };
+                    menuItems = { text: me.APIManager.APIManagerView.getDescriptionText(key), url: '#' + parentObj.join('.'), items: modelUtils.buildMenuItems.call(me, value, parentObj) };
                 };
 
                 // Add menuItems object to 'list' array
@@ -184,7 +184,7 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
 
         try {
             $.each(this.getData(), function (key) {
-                mainMenuList.push({ text: me.APIManager.getDescriptionText(key), url: '?menu=' + key });
+                mainMenuList.push({ text: me.APIManager.APIManagerView.getDescriptionText(key), url: '?menu=' + key });
             });
         }
         catch (error) {

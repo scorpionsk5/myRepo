@@ -1,9 +1,27 @@
-﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'nicescroll'], function ($, kendo, _, templateStoreClass) {
+﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'text!../../../data/descriptionText.json', 'nicescroll'], function ($, kendo, _, templateStoreClass, descriptionText) {
+
+    var currentDescriptionTextObject = {},
+
+        // This method returns a method that will fetch corresponding customKeywordText or description text
+        loadDescriptionText = function () {
+            var parsedDescriptionTextObject = JSON.parse(descriptionText), descriptionTextObject = {};
+
+            $.each(parsedDescriptionTextObject, function (moduleName, descriptionObject) {
+                if (moduleName[0] != '_') {
+                    descriptionTextObject[moduleName] = $.extend(true, {}, parsedDescriptionTextObject._CommonConfigurations, parsedDescriptionTextObject[moduleName]);
+                };
+            });
+
+            return function (key) {
+                currentDescriptionTextObject = descriptionTextObject[key];
+            };
+        };
 
     // View Class
     var view = function (Args) {
         this.$container = $(Args.container);
         this.APIManager = Args.APIManager;
+        this.setDescriptionText = loadDescriptionText();
         this.initializePage();
 
         // Create Instance of templateStoreClass
@@ -58,14 +76,6 @@
             grabcursorenabled: false,
         });
 
-        //// Creating custom scroll on main container
-        //this.$container.niceScroll({
-        //    bouncescroll: true,
-        //    cursorcolor: scrollBarColor,
-        //    autohidemode: true,
-        //    grabcursorenabled: false,
-        //});
-
         // Creating popup window to display messages
         messageWindow.kendoWindow({
             actions: ["Close"],
@@ -96,8 +106,8 @@
             dataSource: menuData
         };
 
+        // Creating widget to display menu based on appSettings
         switch (this.APIManager.appSettings.MenuType) {
-            // Creating widget to display menu based on appSettings
             case 'kendoPanelBar': this.menuElement.kendoPanelBar(options);
                 break;
             case 'kendoMenu': this.menuElement.kendoMenu(options);
@@ -176,7 +186,12 @@
             title: title || 'Atert!!!'
         });
         this.messageWindow.open().center();  // Open message window and set position to center 
-    }
+    };
+
+    // This method returns corresponding customKeywordText or description text
+    view.prototype.getDescriptionText = function (key) {
+        return currentDescriptionTextObject[key] || key;
+    };
 
     return view;
 });

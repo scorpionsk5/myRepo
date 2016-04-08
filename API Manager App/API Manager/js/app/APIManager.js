@@ -1,21 +1,14 @@
-﻿define(['app/model/model', 'app/view/view', 'app/controller/controller', 'text!../../data/descriptionText.json', 'text!../../../appSettings/appSettings.json'], function (model, view, controller, descriptionText, settings) {
+﻿define(['app/model/model', 'app/view/view', 'app/controller/controller', 'text!../../../appSettings/appSettings.json', 'jquery'], function (model, view, controller, settings, $) {
 
-    // This method returns a method that will fetch corresponding customKeywordText or description text
-    var loadDescriptionText = function () {
-        var descriptionTextObject = JSON.parse(descriptionText);
+    // Method to read JSON settings file and returns settings object
+    var readSettings = function () {
+        var settingData = JSON.parse(settings);
+        return settingData;
+    };
 
-        return function (key) {
-            return descriptionTextObject[key] || key;
-        }
-    },
-        readSettings = function () {    // Method to read JSON settings file and returns settings object
-            var settingData = JSON.parse(settings);
-            return settingData;
-        }
-
+    // API Manager Application
     var APIManager = function () {
 
-        this.getDescriptionText = loadDescriptionText();
         this.appSettings = readSettings.call(this);
 
         // Instantiation of Model, View and Controller
@@ -30,24 +23,27 @@
         var urlString = document.URL;
         var mainMenuName = urlString.match(/([?]menu)*?=[^&#]*/g);
 
+        // This will load main menu as mentioned in url string
+        try {
+            if (mainMenuName) {
+                var menuName = mainMenuName[0].split('=')[1];
+                this.APIManagerModel.selectObject(menuName);
+                this.APIManagerView.setDescriptionText(menuName);
+            }
+            else {
+                this.APIManagerModel.selectObject(this.appSettings.DefaultMainMenu);
+                this.APIManagerView.setDescriptionText(this.appSettings.DefaultMainMenu);
+            }
+        }
+        catch (error) {
+            console.log(error);
+            this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
+        };
+
         // Generate main menu
         var mainMenuData = this.APIManagerModel.generateMainMenuList();
 
         this.APIManagerView.createMainMenu(mainMenuData);
-
-        // This will load main menu as mentioned in url string
-        try {
-            if (mainMenuName) {
-                this.APIManagerModel.selectObject(mainMenuName[0].split('=')[1]);
-            }
-            else {
-                this.APIManagerModel.selectObject(this.appSettings.DefaultMainMenu);
-            }
-        }
-        catch (e) {
-            console.log(error);
-            this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
-        }
 
         // Generate menu list by excluding unwanted properties data object
         var menuData = this.APIManagerModel.generateSubMenuList();

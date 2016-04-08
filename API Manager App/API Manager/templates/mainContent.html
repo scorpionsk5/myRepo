@@ -2,23 +2,27 @@
 var dataObj=data.dataObject, secondaryLink=data.secondaryLink,primaryLink=data.primaryLink;
 var headers=primaryLink.split('.');
 var mainNode= headers[0];
-var me=this;
+var me=this;#
 
-_.isString(dataObj) && (dataObj.search('_CommonDescriptions') == 0) && (dataObj=me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
+<!-- If the dataObj is string and starts with '_CommonDescriptions' then get object value from path mentioned -->
+#_.isString(dataObj) && (dataObj.search('_CommonDescriptions') == 0) && (dataObj=me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
 #
 
+<!-- Print headers, i.e first two levels of sub menu items -->
 <div>
-    <h1 class="contentHeader">#=headers[0]#</h1>
+    <h1 class="contentHeader">#=me.APIManager.APIManagerView.getDescriptionText(headers[0])#</h1>
     #if(headers.length>1){#
-    <h2 class="contentHeader">#=headers[1]#</h2>
+    <h2 class="contentHeader">#=me.APIManager.APIManagerView.getDescriptionText(headers[1])#</h2>
     #}#
 </div>
 
 #if(headers.length == 1){#
-    #_.each(dataObj,function(value,key){#
+    <!-- Print sub menu items as menu if first level sub menu is selected -->
+    #_.each(dataObj,function(value, key){#
         <span class="listItem"><a href="\\##=mainNode + '.' + key#">#=key#</a></span>
     #})#
 #}
 else{#
+    <!-- Load itemContent template and pass dataObj as argument to load detailed contents -->
     #=me.templateStore.TemplateCache['templates/itemContent'].call(me,{dataObj:dataObj})#
 #}#

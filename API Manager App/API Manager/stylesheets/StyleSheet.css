@@ -112,3 +112,11 @@ body {
     border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
+
+    .mainMenuElement a {
+        color: rgb(107, 107, 107) !important;
+    }
+
+        .mainMenuElement a:hover {
+            color: rgb(255, 255, 255) !important;
+        }
