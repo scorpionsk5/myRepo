@@ -25,6 +25,9 @@
     var controller = function (Args) {
         this.APIManager = Args.APIManager;
         this.APIManagerEvents = events;
+
+        // Add click event listener on body which route to corresponding event handler
+        this.addClickListeners(this.APIManager.APIManagerView.$container);
     };
 
     // Method to add click event listener

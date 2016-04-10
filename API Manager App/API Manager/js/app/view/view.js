@@ -24,8 +24,14 @@
         this.setDescriptionText = loadDescriptionText();
         this.initializePage();
 
-        // Create Instance of templateStoreClass
-        this.templateStore = new templateStoreClass({ APIManager: this.APIManager });;
+        try {
+            // Create Instance of templateStoreClass
+            this.templateStore = new templateStoreClass();
+        }
+        catch (err) {
+            console.log(err);
+            this.APIManager.APIManagerView.displayMessage('Error occured while registering templates. Please check console for more details!!!');
+        };
     };
 
     // Method to initialize page by create required containers and widgetize them
@@ -43,7 +49,6 @@
 
         // Container element which will be widgetized to kendoSplitter
         var $spliterPanel = $('<div>')
-            //.css({ height: clientWindowHeight })
             .addClass('spliterPanel')
             .appendTo(this.$container);
 

@@ -24,8 +24,7 @@
 
         var templates = arguments;
 
-        var templateStoreClass = function (Args) {
-            this.APIManager = Args.APIManager;
+        var templateStoreClass = function () {
             this.TemplateHTML = {};// html strings
             this.TemplateCache = {};// kendo template functions
 
@@ -38,14 +37,8 @@
         templateStoreClass.prototype.registerTemplate = function (templateId, template) {
             if (this.TemplateCache[templateId]) return;
 
-            try {
-                this.TemplateHTML[templateId] = template;
-                this.TemplateCache[templateId] = kendo.template(template);
-            }
-            catch (err) {
-                console.log(err);
-                this.APIManager.APIManagerView.displayMessage('Error occured while registering templates. Please check console for more details!!!');
-            };
+            this.TemplateHTML[templateId] = template;
+            this.TemplateCache[templateId] = kendo.template(template);
         };
 
 

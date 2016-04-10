@@ -40,9 +40,10 @@
             this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
         };
 
-        // Generate main menu
+        // Generate main menu items
         var mainMenuData = this.APIManagerModel.generateMainMenuList();
 
+        // Create main menu
         this.APIManagerView.createMainMenu(mainMenuData);
 
         // Generate menu list by excluding unwanted properties data object
@@ -51,14 +52,14 @@
         // Create menu from ganerated menu list 
         this.APIManagerView.createSubMenu(menuData);
 
-        // Add click event listener on body which route to corresponding event handler
-        this.APIManagerController.addClickListeners(document.body);
-
         // This will load data when page is refreshed and also object path is mentioned in url
         if (urlString.indexOf('#') > -1) {
             urlPath = urlString.split('#'); // Splitting url string by '#' and passing string after # tag as argument to loadContentPage method
             this.APIManagerController.APIManagerEvents.loadContentPage.call(this.APIManagerController, null, urlPath[1], { isUrlChanged: true });    // Here 'null' is passed beacuse method is not called by event handler
         };
+
+        // Remove loading animation
+        $('.loaderContainer').remove();
     };
 
     return APIManager;
