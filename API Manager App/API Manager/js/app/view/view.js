@@ -174,7 +174,7 @@
         var scrollTop, scrollItem;
 
         // Finding header element which contains required data-name attribute
-        scrollItem = $('h3[data-name=' + dataName + ']');
+        scrollItem = this.$container.find('h3[data-name=' + dataName + ']');
 
         // Set scroll to top most position
         this.mainContainer.scrollTop({ top: 0 });
