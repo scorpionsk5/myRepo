@@ -8,7 +8,7 @@
 
             $.each(parsedDescriptionTextObject, function (moduleName, descriptionObject) {
                 if (moduleName[0] != '_') {
-                    descriptionTextObject[moduleName] = $.extend(true, {}, parsedDescriptionTextObject._CommonConfigurations, parsedDescriptionTextObject[moduleName] || {});
+                    descriptionTextObject[moduleName] = $.extend(true, {}, parsedDescriptionTextObject._CommonConfigurations, descriptionObject || {});
                 };
             });
 
@@ -40,7 +40,7 @@
         var scrollBarColor = 'rgb(196, 196, 196)', messageWindow = $('<div>').addClass('messageWindow');
 
         // Main Header element
-        $('<h1>').addClass('mainHeader').text(this.APIManager.appSettings.AppHeader).appendTo($('<div>').addClass('headerContainer').appendTo(this.$container));
+        $('<h1>').addClass('mainHeader').text(this.APIManager.getAppSettings().AppHeader || "API").appendTo($('<div>').addClass('headerContainer').appendTo(this.$container));
 
         this.mainMenuElement = $('<div>').addClass('mainMenuElement').appendTo(this.$container);
 
@@ -97,29 +97,31 @@
     // Method to create sub menu
     view.prototype.createSubMenu = function (menuData) {
 
-        var options = {
-            animation: {
-                collapse: {
-                    duration: 100,
-                    effects: "collapseVertical"
+        if (menuData) {
+            var options = {
+                animation: {
+                    collapse: {
+                        duration: 100,
+                        effects: "collapseVertical"
+                    },
+                    expand: {
+                        duration: 100,
+                        effects: "expandVertical"
+                    }
                 },
-                expand: {
-                    duration: 100,
-                    effects: "expandVertical"
-                }
-            },
-            dataSource: menuData
-        };
+                dataSource: menuData
+            };
 
-        // Creating widget to display menu based on appSettings
-        switch (this.APIManager.appSettings.MenuType) {
-            case 'kendoPanelBar': this.menuElement.kendoPanelBar(options);
-                break;
-            case 'kendoMenu': this.menuElement.kendoMenu(options);
-                break;
-            default: this.menuElement.kendoTreeView(options);
-                break;
-        }
+            // Creating widget to display menu based on appSettings
+            switch (this.APIManager.getAppSettings().MenuType) {
+                case 'kendoPanelBar': this.menuElement.kendoPanelBar(options);
+                    break;
+                case 'kendoMenu': this.menuElement.kendoMenu(options);
+                    break;
+                default: this.menuElement.kendoTreeView(options);
+                    break;
+            };
+        };
     };
 
     // Method to create Main menu

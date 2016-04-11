@@ -20,7 +20,7 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
                     // If value is a string, it may be a path to get required data from data Object
                     stringArray = value.split('.');
                     // If it is a path then it will starts with '_CommonDescriptions'
-                    (stringArray[0] == '_CommonDescriptions') && (value = me.getObjectByPath(me.getSelectedDataObject(), value))
+                    (stringArray[0] == '_CommonDescriptions') && (value = me.getObjectByPath(me.getSelectedDataObject(), value));
                 };
 
                 if (_.isObject(value) && !_.isArray(value)) {
@@ -33,8 +33,8 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
                     };
 
                     // Remove properties that shouldn't be displayed in menu
-                    dataObject[key] = _.omit(value, me.APIManager.appSettings.DescriptiveFields);
-                    (!_.isEmpty(dataObject[key])) && value['_InnerFields'] && (dataObject[key] = _.omit(value['_InnerFields'], me.APIManager.appSettings.DescriptiveFields));
+                    dataObject[key] = _.omit(value, me.APIManager.getAppSettings().DescriptiveFields);
+                    (!_.isEmpty(dataObject[key])) && value['_InnerFields'] && (dataObject[key] = _.omit(value['_InnerFields'], me.APIManager.getAppSettings().DescriptiveFields));
 
                     // Invoke same method and pass updated object
                     dataObject[key] = modelUtils.removeDetailsFromDataObject.call(me, dataObject[key]);
@@ -97,29 +97,23 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
 
         // Method to apply custom sort
         customSort: function (dataObj, skipSort) {
-            var sortedObj = {}, sortedList = [], me = this;
+            var sortedObj = {}, sortedList = [], me = this, settings = me.APIManager.getAppSettings();
 
             if (!skipSort) {
 
                 // Build a sorted list of widget properties in which data should be orderd
                 $.each(dataObj, function (key) {
-                    (!(key[0] == '_') && key != 'Type' && key != 'QueryId') && sortedList.push(key)
+                    (_.indexOf(_.union(settings.PreSortedContents, settings.PostSortedContents), key) == -1) && sortedList.push(key);
                 });
-                sortedList.sort();
 
-                // Add keys which is to be displayed before widget properties
-                sortedList.unshift('QueryId');
-                sortedList.unshift('Type');
-                sortedList.unshift('_Arguments');
-                sortedList.unshift('_Description');
-                sortedList.unshift('_DataType');
-                sortedList.unshift('_CommonDescriptions');
+                // Sort items
+                sortedList.sort(function (a, b) {
+                    var a1 = a.toLowerCase(), b1 = b.toLowerCase();
+                    if (a1 == b1) return 0;
+                    return a1 > b1 ? 1 : -1;
+                });
 
-                // Add keys which is to be displayed after widget properties
-                sortedList.push('Config');
-                sortedList.push('_InnerFields');
-                sortedList.push('_AvailableOptions');
-                sortedList.push('_Note');
+                sortedList = _.union(settings.PreSortedContents, sortedList, settings.PostSortedContents);
             }
             else {
                 // It skips custom sorting for the properties of current dataObj
@@ -134,9 +128,7 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
 
                     _.isObject(dataObj[item]) &&
                     !_.isArray(dataObj[item]) &&
-                    (dataObj[item] = modelUtils.customSort.call(me, dataObj[item], _.findIndex(me.APIManager.appSettings.SkipSortingFields, function (field) {
-                        return item == field
-                    }) > -1))
+                    (dataObj[item] = modelUtils.customSort.call(me, dataObj[item], _.indexOf(settings.SkipSortingFields, item) > -1));
 
                     sortedObj[item] = dataObj[item]
                 };
@@ -167,8 +159,10 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
         var menuTree = {};
 
         try {
-            // Get parsed JSON data and remove unwanted properties to which shouldn't be displayed in menu and then build menu data
-            menuTree = modelUtils.buildMenuItems.call(this, modelUtils.removeDetailsFromDataObject.call(this, _.omit(this.getSelectedDataObject(), '_CommonDescriptions')));
+            if (this.getSelectedDataObject()) {
+                // Get parsed JSON data and remove unwanted properties to which shouldn't be displayed in menu and then build menu data
+                menuTree = modelUtils.buildMenuItems.call(this, modelUtils.removeDetailsFromDataObject.call(this, _.omit(this.getSelectedDataObject(), '_CommonDescriptions')));
+            }
         }
         catch (error) {
             console.log(error);

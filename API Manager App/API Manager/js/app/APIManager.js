@@ -1,15 +1,31 @@
 ﻿define(['app/model/model', 'app/view/view', 'app/controller/controller', 'text!../../../appSettings/appSettings.json', 'jquery'], function (model, view, controller, settings, $) {
 
+    var currentSettings = {},
+
     // Method to read JSON settings file and returns settings object
-    var readSettings = function () {
-        var settingData = JSON.parse(settings);
-        return settingData;
-    };
+        readSettings = function () {
+            var parsedSettingsData = JSON.parse(settings), settingsData = {};
+
+            $.each(parsedSettingsData, function (moduleName, settingsObject) {
+                if (moduleName[0] != '_') {
+                    settingsData[moduleName] = $.extend(true, {}, parsedSettingsData._CommonAppSettings, settingsObject || {});
+                }
+                else {
+                    settingsData[parsedSettingsData._CommonAppSettings.DefaultMainMenu] = $.extend(true, {}, parsedSettingsData._CommonAppSettings, settingsObject || {});
+                };
+            });
+
+            parsedSettingsData._CommonAppSettings.DefaultMainMenu && (currentSettings = settingsData[parsedSettingsData._CommonAppSettings.DefaultMainMenu]);
+
+            return function (key) {
+                currentSettings = settingsData[key];
+            };
+        };
 
     // API Manager Application
     var APIManager = function () {
 
-        this.appSettings = readSettings.call(this);
+        this.setAppSettings = readSettings.call(this);
 
         // Instantiation of Model, View and Controller
         this.APIManagerView = new view({ APIManager: this, container: document.body });
@@ -21,23 +37,20 @@
 
         // Reading url string to load previously loaded page
         var urlString = document.URL;
-        var mainMenuName = urlString.match(/([?]menu)*?=[^&#]*/g);
+        var mainMenuName = urlString.match(/([?]menu)*?=[^&#]*/g),
+            menuName = mainMenuName ? mainMenuName[0].split('=')[1] : this.getAppSettings().DefaultMainMenu;
 
-        // This will load main menu as mentioned in url string
-        try {
-            if (mainMenuName) {
-                var menuName = mainMenuName[0].split('=')[1];
+        if (menuName) {
+            // This will load main menu as mentioned in url string
+            try {
+                this.setAppSettings(menuName);
                 this.APIManagerModel.selectObject(menuName);
                 this.APIManagerView.setDescriptionText(menuName);
             }
-            else {
-                this.APIManagerModel.selectObject(this.appSettings.DefaultMainMenu);
-                this.APIManagerView.setDescriptionText(this.appSettings.DefaultMainMenu);
-            }
-        }
-        catch (error) {
-            console.log(error);
-            this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
+            catch (error) {
+                console.log(error);
+                this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
+            };
         };
 
         // Generate main menu items
@@ -60,6 +73,10 @@
 
         // Remove loading animation
         $('.loaderContainer').remove();
+    };
+
+    APIManager.prototype.getAppSettings = function () {
+        return currentSettings || {};
     };
 
     return APIManager;
