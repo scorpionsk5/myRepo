@@ -6,12 +6,12 @@
         readSettings = function () {
             var parsedSettingsData = JSON.parse(settings), settingsData = {};
 
-            $.each(parsedSettingsData, function (moduleName, settingsObject) {
+            $.each(parsedSettingsData, function (moduleName, moduleSettings) {
                 if (moduleName[0] != '_') {
-                    settingsData[moduleName] = $.extend(true, {}, parsedSettingsData._CommonAppSettings, settingsObject || {});
+                    settingsData[moduleName] = $.extend(true, {}, parsedSettingsData._CommonAppSettings, moduleSettings || {});
                 }
                 else {
-                    settingsData[parsedSettingsData._CommonAppSettings.DefaultMainMenu] = $.extend(true, {}, parsedSettingsData._CommonAppSettings, settingsObject || {});
+                    settingsData[parsedSettingsData._CommonAppSettings.DefaultMainMenu] = $.extend(true, {}, parsedSettingsData._CommonAppSettings, moduleSettings || {});
                 };
             });
 
