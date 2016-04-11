@@ -44,9 +44,6 @@
 
         this.mainMenuElement = $('<div>').addClass('mainMenuElement').appendTo(this.$container);
 
-        // Calculate container height to fit to clients browser
-        var clientWindowHeight = (document.body.scrollHeight - 135).toString() + 'px';
-
         // Container element which will be widgetized to kendoSplitter
         var $spliterPanel = $('<div>')
             .addClass('spliterPanel')
