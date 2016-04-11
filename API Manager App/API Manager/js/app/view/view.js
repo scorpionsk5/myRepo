@@ -8,7 +8,7 @@
 
             $.each(parsedDescriptionTextObject, function (moduleName, descriptionObject) {
                 if (moduleName[0] != '_') {
-                    descriptionTextObject[moduleName] = $.extend(true, {}, parsedDescriptionTextObject._CommonConfigurations, parsedDescriptionTextObject[moduleName]);
+                    descriptionTextObject[moduleName] = $.extend(true, {}, parsedDescriptionTextObject._CommonConfigurations, parsedDescriptionTextObject[moduleName] || {});
                 };
             });
 
