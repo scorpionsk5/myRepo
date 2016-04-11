@@ -7,8 +7,7 @@
             kendo: 'lib/kendo.all.min',
             text: 'lib/text',
             underscore: 'lib/underscore-min',
-            nicescroll: 'lib/nicescroll',
-            async:'lib/async'
+            nicescroll: 'lib/nicescroll'
         },
         shim: {
             kendo: {
