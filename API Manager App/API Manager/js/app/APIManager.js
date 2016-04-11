@@ -2,7 +2,7 @@
 
     var currentSettings = {},
 
-    // Method to read JSON settings file and returns settings object
+        // Method to read JSON settings file and returns settings object
         readSettings = function () {
             var parsedSettingsData = JSON.parse(settings), settingsData = {};
 
@@ -75,6 +75,7 @@
         $('.loaderContainer').remove();
     };
 
+    // Method to get current App settings object
     APIManager.prototype.getAppSettings = function () {
         return currentSettings || {};
     };
