@@ -40,7 +40,7 @@
                     var href = $(e.target).attr('href'), urlString = document.URL.split('#');
 
                     // loadContentPage method is call if 'href' attribute of current target element starts with '#'
-                    (href[0] == '#') && me.APIManagerEvents.loadContentPage.call(me, e, href, { isUrlChanged: utils.isUrlChanged(href, urlString[1]) });
+                    (href[0] == '#') && me.APIManagerEvents[me.moduleName] && me.APIManagerEvents[me.moduleName].call(me, e, href, { isUrlChanged: utils.isUrlChanged(href, urlString[1]) });
                 }
                 catch (error) {
                     console.log(error);

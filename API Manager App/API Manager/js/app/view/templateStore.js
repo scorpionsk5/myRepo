@@ -2,12 +2,14 @@
 (function () {
     var definitions = {},
         html = function (part, key) {
-            definitions['text!../../../' + part + '.html'] = key || part;
+            definitions['text!../../../templates' + part + '.html'] = key || part;
         };
 
     // Add templates by Templates path
-    html('templates/mainContent');
-    html('templates/itemContent');
+    html('defaultTemplates/mainContent');
+    html('defaultTemplates/itemContent');
+    html('EMTemplates/mainContent');
+    html('EMTemplates/itemContent');
 
     var dependencies = [];
 
@@ -18,15 +20,16 @@
 
     // Add 'kendo' as first item in dependencies list
     dependencies.unshift('kendo');
+    dependencies.unshift('jquery');
 
     // Load dependencies using requireJs
-    define(dependencies, function (kendo) {
+    define(dependencies, function ($, kendo) {
 
         var templates = arguments;
 
         var templateStoreClass = function () {
-            this.TemplateHTML = {};// html strings
-            this.TemplateCache = {};// kendo template functions
+            this.TemplateHTML = {};     // html strings
+            this.TemplateCache = {};    // kendo template functions
 
             for (var i = 1; i < templates.length; i++) {
                 this.registerTemplate(definitions[dependencies[i]], templates[i]);

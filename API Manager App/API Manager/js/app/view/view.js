@@ -1,6 +1,7 @@
 ﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'text!../../../data/descriptionText.json', 'nicescroll'], function ($, kendo, _, templateStoreClass, descriptionText) {
 
     var currentDescriptionTextObject = {},
+        templateStore = null,
 
         // This method returns a method that will fetch corresponding customKeywordText or description text
         loadDescriptionText = function () {
@@ -26,7 +27,7 @@
 
         try {
             // Create Instance of templateStoreClass
-            this.templateStore = new templateStoreClass();
+            templateStore = new templateStoreClass();
         }
         catch (err) {
             console.log(err);
@@ -141,28 +142,32 @@
         this.mainMenuElement.kendoMenu(options);
     };
 
-    // Method to load data in main content
-    view.prototype.loadMainContent = function (Args) {
+    //// Method to load data in main content
+    //view.prototype.loadMainContent = function (Args) {
 
-        var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
+    //    var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
 
-        // Get required Object by passing data object and path as a arguments 
-        Args.dataObject = this.APIManager.APIManagerModel.getObjectByPath(dataObject, Args.primaryLink);
+    //    // Get required Object by passing data object and path as a arguments 
+    //    Args.dataObject = this.APIManager.APIManagerModel.getObjectByPath(dataObject, Args.primaryLink);
 
-        try {
-            // Load template with Args object all information regarding displaying data on page and store the compiled template in compiledTemplate variable
-            Args.dataObject && this.templateStore.TemplateCache['templates/mainContent'] && (compiledTemplate = this.templateStore.TemplateCache['templates/mainContent'].call(this, Args));
-        }
-        catch (err) {
-            console.log(err);
-            this.displayMessage('Error occured while loading template. Please check console for more details!!!');
-        };
+    //    try {
+    //        // Load template with Args object all information regarding displaying data on page and store the compiled template in compiledTemplate variable
+    //        Args.dataObject && this.templateStore.TemplateCache['templates/mainContent'] && (compiledTemplate = this.templateStore.TemplateCache['templates/mainContent'].call(this, Args));
+    //    }
+    //    catch (err) {
+    //        console.log(err);
+    //        this.displayMessage('Error occured while loading template. Please check console for more details!!!');
+    //    };
 
-        // If template is complied successfully then load the template in container
-        if (compiledTemplate) {
-            this.mainContainer.html('');
-            this.mainContainer.html(compiledTemplate);
-        };
+    //    // If template is complied successfully then load the template in container
+    //    if (compiledTemplate) {
+    //        this.mainContainer.html('');
+    //        this.mainContainer.html(compiledTemplate);
+    //    };
+    //};
+
+    view.prototype.renderTemplate = function (templateId, data) {
+        return templateStore.TemplateCache[templateId].call(this, data);
     };
 
     // Method to Adjust scroll to display the required property  

@@ -21,6 +21,7 @@
         if (menuName) {
             // This will load main menu as mentioned in url string
             try {
+                this.APIManagerController.moduleName = menuName;
                 this.appSettings.setAppSettings(menuName);
                 this.APIManagerModel.selectObject(menuName);
                 this.APIManagerView.setDescriptionText(menuName);
