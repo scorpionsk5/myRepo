@@ -33,8 +33,8 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
                     };
 
                     // Remove properties that shouldn't be displayed in menu
-                    dataObject[key] = _.omit(value, me.APIManager.getAppSettings().DescriptiveFields);
-                    (!_.isEmpty(dataObject[key])) && value['_InnerFields'] && (dataObject[key] = _.omit(value['_InnerFields'], me.APIManager.getAppSettings().DescriptiveFields));
+                    dataObject[key] = _.omit(value, me.APIManager.appSettings.getAppSettings().DescriptiveFields);
+                    (!_.isEmpty(dataObject[key])) && value['_InnerFields'] && (dataObject[key] = _.omit(value['_InnerFields'], me.APIManager.appSettings.getAppSettings().DescriptiveFields));
 
                     // Invoke same method and pass updated object
                     dataObject[key] = modelUtils.removeDetailsFromDataObject.call(me, dataObject[key]);
@@ -97,7 +97,7 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
 
         // Method to apply custom sort
         customSort: function (dataObj, skipSort) {
-            var sortedObj = {}, sortedList = [], me = this, settings = me.APIManager.getAppSettings();
+            var sortedObj = {}, sortedList = [], me = this, settings = me.APIManager.appSettings.getAppSettings();
 
             if (!skipSort) {
 

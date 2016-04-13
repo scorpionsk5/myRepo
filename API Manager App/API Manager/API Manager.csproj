@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\app\settingsManager.js" />
     <Content Include="js\app\view\templateStore.js" />
     <Content Include="data\API-Data.json" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />

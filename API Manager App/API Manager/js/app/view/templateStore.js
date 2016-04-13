@@ -5,7 +5,7 @@
             definitions['text!../../../' + part + '.html'] = key || part;
         };
 
-    // Templates path
+    // Add templates by Templates path
     html('templates/mainContent');
     html('templates/itemContent');
 
