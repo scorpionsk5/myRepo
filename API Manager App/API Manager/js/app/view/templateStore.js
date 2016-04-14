@@ -1,11 +1,8 @@
 ﻿define(['underscore', 'kendo'], function (_, kendo) {
 
-    return new (function () {
+    var TemplateCache = {}, // kendo template functions
 
-        var TemplateCache = {}, // kendo template functions
-            me = this;
-
-        var fetchTemplate = function (config) {
+        fetchTemplate = function (config) {
             config = $.extend(
                 {
                     cache: false,
@@ -14,35 +11,43 @@
 
             $.ajax(config);
         };
+    // Template store class
+    var templateStore = function () {
 
-        // Method to convert template html string to kendo template function
-        me.prototype.registerTemplate = function (templateId, template) {
-            if (TemplateCache[templateId]) return;
+    };
 
-            TemplateCache[templateId] = this.compileTemplate(template);
+    // Method to convert template html string to kendo template function
+    templateStore.prototype.registerTemplate = function (templateId, template) {
+        if (TemplateCache[templateId]) return;
+
+        TemplateCache[templateId] = this.compileTemplate(template);
+    };
+
+    // Method to complie template into kendo template function
+    templateStore.prototype.compileTemplate = function (template) {
+        return kendo.template(template);
+    };
+
+    // Method to get template by making ajax calls
+    templateStore.prototype.getTemplate = function (templateId) {
+        var me = this;
+        if (!TemplateCache[templateId]) {
+            fetchTemplate({
+                url: 'templates/' + templateId, context: me,
+                success: function (template) {
+                    me.registerTemplate(templateId, template);
+                }
+            });
         };
 
-        me.prototype.compileTemplate = function (template) {
-            return kendo.template(template);
-        };
+        return TemplateCache[templateId];
+    };
 
-        me.prototype.getTemplate = function (templateId) {
-            if (!TemplateCache[templateId]) {
-                fetchTemplate({
-                    url: 'templates/' + templateId, context: me,
-                    success: function (template) {
-                        me.registerTemplate(templateId, template);
-                    }
-                });
-            };
+    // Method to render template by executing compiled template with data as argument
+    templateStore.prototype.renderTemplate = function (templateId, data) {
+        return this.getTemplate(templateId)(data);
+    };
 
-            return TemplateCache[templateId];
-        };
-
-        me.prototype.renderTemplate = function (templateId, data) {
-            return me.getTemplate(templateId)(data);
-        };
-    })();
-
+    return new templateStore();
 });
 

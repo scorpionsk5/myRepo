@@ -36,8 +36,8 @@
         $(container).on('click', function (e) {
             if (e.target.tagName == 'A') {
                 try {
-                    var mainMenuName = urlString.match(/([?]menu)*?=[^&#]*/g),
-                        menuName = mainMenuName ? mainMenuName[0].split('=')[1] : this.appSettings.getAppSettings().DefaultMainMenu;
+                    var mainMenuName = document.URL.match(/([?]menu)*?=[^&#]*/g),
+                        menuName = mainMenuName ? mainMenuName[0].split('=')[1] : me.APIManager.appSettings.getAppSettings().DefaultMainMenu;
 
                     // Executes if event is triggered by 'anchor' element 
                     var href = $(e.target).attr('href'), urlString = document.URL.split('#');

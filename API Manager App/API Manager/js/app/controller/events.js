@@ -28,25 +28,40 @@
 
         // Methods to load data in main content
         loadMainContent = function (Args) {
-            var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
+            if (Args.isUrlChanged) {
 
-            // Get required Object by passing data object and path as a arguments 
-            Args.dataObject = this.APIManager.APIManagerModel.getObjectByPath(dataObject, Args.primaryLink);
+                var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
 
-            try {
-                // Load template with Args object all information regarding displaying data on page and store the compiled template in compiledTemplate variable
-                Args.dataObject && (compiledTemplate = this.APIManagerView.templates.renderTemplate(Args.templatePath, Args));
+                // Parse contentpath and pass it to loadMainContent method
+                Args.parsedLink = utils.parseObjectLink.call(this, Args.contentPath);
+
+                // Get required Object by passing data object and path as a arguments 
+                Args.dataObject = this.APIManager.APIManagerModel.getObjectByPath(dataObject, Args.primaryLink);
+
+                try {
+                    // Load template with Args object all information regarding displaying data on page and store the compiled template in compiledTemplate variable
+                    Args.dataObject && (compiledTemplate = this.APIManagerView.templates.renderTemplate(Args.templatePath, Args));
+                }
+                catch (err) {
+                    console.log(err);
+                    this.APIManagerView.displayMessage('Error occured while loading template. Please check console for more details!!!');
+                };
+
+                // If template is complied successfully then load the template in container
+                if (compiledTemplate) {
+                    this.APIManagerView.mainContainer.html('');
+                    this.APIManagerView.mainContainer.html(compiledTemplate);
+                };
             }
-            catch (err) {
-                console.log(err);
-                this.APIManagerView.displayMessage('Error occured while loading template. Please check console for more details!!!');
-            };
 
-            // If template is complied successfully then load the template in container
-            if (compiledTemplate) {
-                this.APIManagerView.mainContainer.html('');
-                this.APIManagerView.mainContainer.html(compiledTemplate);
-            };
+
+            // Adjust scroll after loading content
+            this.APIManager.APIManagerView.adjustScroll(Args.parsedLink.scrollToProperty);
+
+            // Set attribute for anchors in content page to redirect url with new tab
+            this.APIManager.APIManagerView.mainContainer.find('a[href^=http]')
+                .attr('target', '_blank')
+                .addClass('externalLink');
         };
 
     // Object where all event Handlers are defined
@@ -54,21 +69,10 @@
 
         // Method to load required content on page
         EnterpriseManager: function (e, contentPath, options) {
-            var APIManager = this.APIManager || this, parsedLink = {};
-            this.e = e;
+            var APIManager = this.APIManager || this;
 
-            // Parse contentpath and pass it to loadMainContent method
-            parsedLink = utils.parseObjectLink.call(this, contentPath);
-            // Call loadMainContent method only if url is changed
-            (options) && (options.isUrlChanged) && loadMainContent.call(this, _.extend({}, { APIManager: APIManager, e: this.e, templatePath: 'EMTemplates/mainContent.html' }, parsedLink));
-
-            // Adjust scroll after loading content
-            APIManager.APIManagerView.adjustScroll(parsedLink.scrollToProperty);
-
-            // Set attribute for anchors in content page to redirect url with new tab
-            APIManager.APIManagerView.mainContainer.find('a[href^=http]')
-                .attr('target', '_blank')
-                .addClass('externalLink');
+            // Call loadMainContent to load content
+            loadMainContent.call(this, _.extend({}, { APIManager: APIManager, e: e, templatePath: 'EMTemplates/mainContent.html', contentPath: contentPath }, options));
         }
     };
 
