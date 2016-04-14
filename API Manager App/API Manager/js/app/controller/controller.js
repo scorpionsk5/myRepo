@@ -36,11 +36,14 @@
         $(container).on('click', function (e) {
             if (e.target.tagName == 'A') {
                 try {
+                    var mainMenuName = urlString.match(/([?]menu)*?=[^&#]*/g),
+                        menuName = mainMenuName ? mainMenuName[0].split('=')[1] : this.appSettings.getAppSettings().DefaultMainMenu;
+
                     // Executes if event is triggered by 'anchor' element 
                     var href = $(e.target).attr('href'), urlString = document.URL.split('#');
 
                     // loadContentPage method is call if 'href' attribute of current target element starts with '#'
-                    (href[0] == '#') && me.APIManagerEvents[me.moduleName] && me.APIManagerEvents[me.moduleName].call(me, e, href, { isUrlChanged: utils.isUrlChanged(href, urlString[1]) });
+                    (href[0] == '#') && me.APIManagerEvents[menuName] && me.APIManagerEvents[menuName].call(me, e, href, { isUrlChanged: utils.isUrlChanged(href, urlString[1]) });
                 }
                 catch (error) {
                     console.log(error);

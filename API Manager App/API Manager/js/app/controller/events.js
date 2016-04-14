@@ -24,11 +24,10 @@
 
             return { primaryLink: primaryLink, secondaryLink: secondaryLink, scrollToProperty: linkArray[linkArray.length - 1], templatePath: link }
         }
-    };
+    },
 
-    // Methods to load data in main content
-    var contentLoader = {
-        defaultTemplates: function (Args) {
+        // Methods to load data in main content
+        loadMainContent = function (Args) {
             var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
 
             // Get required Object by passing data object and path as a arguments 
@@ -36,7 +35,7 @@
 
             try {
                 // Load template with Args object all information regarding displaying data on page and store the compiled template in compiledTemplate variable
-                Args.dataObject && (compiledTemplate = this.APIManagerView.renderTemplate('templates/mainContent', Args));
+                Args.dataObject && (compiledTemplate = this.APIManagerView.templates.renderTemplate(Args.templatePath, Args));
             }
             catch (err) {
                 console.log(err);
@@ -48,27 +47,26 @@
                 this.APIManagerView.mainContainer.html('');
                 this.APIManagerView.mainContainer.html(compiledTemplate);
             };
-        }
-    };
+        };
 
     // Object where all event Handlers are defined
     var eventHandlers = {
 
         // Method to load required content on page
-        loadContentPage: function (e, contentPath, options) {
+        EnterpriseManager: function (e, contentPath, options) {
             var APIManager = this.APIManager || this, parsedLink = {};
             this.e = e;
 
             // Parse contentpath and pass it to loadMainContent method
             parsedLink = utils.parseObjectLink.call(this, contentPath);
             // Call loadMainContent method only if url is changed
-            (options) && (options.isUrlChanged) && APIManager.APIManagerView.loadMainContent(_.extend({}, { APIManager: APIManager, e: this.e }, parsedLink));
+            (options) && (options.isUrlChanged) && loadMainContent.call(this, _.extend({}, { APIManager: APIManager, e: this.e, templatePath: 'EMTemplates/mainContent.html' }, parsedLink));
 
             // Adjust scroll after loading content
             APIManager.APIManagerView.adjustScroll(parsedLink.scrollToProperty);
 
             // Set attribute for anchors in content page to redirect url with new tab
-            this.APIManager.APIManagerView.mainContainer.find('a[href^=http]')
+            APIManager.APIManagerView.mainContainer.find('a[href^=http]')
                 .attr('target', '_blank')
                 .addClass('externalLink');
         }

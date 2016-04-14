@@ -1,7 +1,6 @@
-﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'text!../../../data/descriptionText.json', 'nicescroll'], function ($, kendo, _, templateStoreClass, descriptionText) {
+﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'text!../../../data/descriptionText.json', 'nicescroll'], function ($, kendo, _, templateStore, descriptionText) {
 
     var currentDescriptionTextObject = {},
-        templateStore = null,
 
         // This method returns a method that will fetch corresponding customKeywordText or description text
         loadDescriptionText = function () {
@@ -27,7 +26,7 @@
 
         try {
             // Create Instance of templateStoreClass
-            templateStore = new templateStoreClass();
+            this.templates = templateStore;
         }
         catch (err) {
             console.log(err);
@@ -165,10 +164,6 @@
     //        this.mainContainer.html(compiledTemplate);
     //    };
     //};
-
-    view.prototype.renderTemplate = function (templateId, data) {
-        return templateStore.TemplateCache[templateId].call(this, data);
-    };
 
     // Method to Adjust scroll to display the required property  
     view.prototype.adjustScroll = function (dataName) {

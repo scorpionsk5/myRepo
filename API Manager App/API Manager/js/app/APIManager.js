@@ -21,7 +21,6 @@
         if (menuName) {
             // This will load main menu as mentioned in url string
             try {
-                this.APIManagerController.moduleName = menuName;
                 this.appSettings.setAppSettings(menuName);
                 this.APIManagerModel.selectObject(menuName);
                 this.APIManagerView.setDescriptionText(menuName);
@@ -47,7 +46,7 @@
         // This will load data when page is refreshed and also object path is mentioned in url
         if (urlString.indexOf('#') > -1) {
             urlPath = urlString.split('#'); // Splitting url string by '#' and passing string after # tag as argument to loadContentPage method
-            this.APIManagerController.APIManagerEvents.loadContentPage.call(this.APIManagerController, null, urlPath[1], { isUrlChanged: true });    // Here 'null' is passed beacuse method is not called by event handler
+            this.APIManagerController.APIManagerEvents[menuName].call(this.APIManagerController, null, urlPath[1], { isUrlChanged: true });    // Here 'null' is passed beacuse method is not called by event handler
         };
 
         // Remove loading animation

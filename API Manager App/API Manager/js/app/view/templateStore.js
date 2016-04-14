@@ -1,51 +1,48 @@
-﻿// Method to load templates
-(function () {
-    var definitions = {},
-        html = function (part, key) {
-            definitions['text!../../../templates' + part + '.html'] = key || part;
-        };
+﻿define(['underscore', 'kendo'], function (_, kendo) {
 
-    // Add templates by Templates path
-    html('defaultTemplates/mainContent');
-    html('defaultTemplates/itemContent');
-    html('EMTemplates/mainContent');
-    html('EMTemplates/itemContent');
+    return new (function () {
 
-    var dependencies = [];
+        var TemplateCache = {}, // kendo template functions
+            me = this;
 
-    // Build dependencies list
-    for (var key in definitions) {
-        dependencies.push(key);
-    }
+        var fetchTemplate = function (config) {
+            config = $.extend(
+                {
+                    cache: false,
+                    async: false, dataType: 'text'
+                }, config);
 
-    // Add 'kendo' as first item in dependencies list
-    dependencies.unshift('kendo');
-
-    // Load dependencies using requireJs
-    define(dependencies, function (kendo) {
-
-        var templates = arguments;
-
-        var templateStoreClass = function () {
-            this.TemplateHTML = {};     // html strings
-            this.TemplateCache = {};    // kendo template functions
-
-            for (var i = 1; i < templates.length; i++) {
-                this.registerTemplate(definitions[dependencies[i]], templates[i]);
-            }
+            $.ajax(config);
         };
 
         // Method to convert template html string to kendo template function
-        templateStoreClass.prototype.registerTemplate = function (templateId, template) {
-            if (this.TemplateCache[templateId]) return;
+        me.prototype.registerTemplate = function (templateId, template) {
+            if (TemplateCache[templateId]) return;
 
-            this.TemplateHTML[templateId] = template;
-            this.TemplateCache[templateId] = kendo.template(template);
+            TemplateCache[templateId] = this.compileTemplate(template);
         };
 
+        me.prototype.compileTemplate = function (template) {
+            return kendo.template(template);
+        };
 
+        me.prototype.getTemplate = function (templateId) {
+            if (!TemplateCache[templateId]) {
+                fetchTemplate({
+                    url: 'templates/' + templateId, context: me,
+                    success: function (template) {
+                        me.registerTemplate(templateId, template);
+                    }
+                });
+            };
 
-        return templateStoreClass;
-    });
-})();
+            return TemplateCache[templateId];
+        };
+
+        me.prototype.renderTemplate = function (templateId, data) {
+            return me.getTemplate(templateId)(data);
+        };
+    })();
+
+});
 
