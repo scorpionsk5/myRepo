@@ -20,10 +20,9 @@
 
     // Add 'kendo' as first item in dependencies list
     dependencies.unshift('kendo');
-    dependencies.unshift('jquery');
 
     // Load dependencies using requireJs
-    define(dependencies, function ($, kendo) {
+    define(dependencies, function (kendo) {
 
         var templates = arguments;
 
