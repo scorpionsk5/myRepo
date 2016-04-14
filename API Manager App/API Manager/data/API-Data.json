@@ -925,8 +925,8 @@
             "_DataType": "Array"
           },
           "actionFilters": {
-            "_Description": "It dispalys the mentioned buttons on toolbar depending on condition specified",
-            "_DataType": "Object",
+            "_Description": "It dispalys the mentioned buttons on toolbar depending on condition specified. It accepts array of objects, each object is a condition for button to display or hide",
+            "_DataType": "Array",
             "_InnerFields": {
               "action": {
                 "_Description": "Action name for which condition is to be applied, value should be same as action string in toolbar config object",
@@ -945,7 +945,7 @@
                 "_DataType": "Integer"
               },
               "condition": {
-                "_Description": "Condition to be checked between minCount and maxCount attribute, default value is 'default'",
+                "_Description": "Condition to be checked between minCount and maxCount properties, default value is 'default'",
                 "_DataType": "String",
                 "_AvailableOptions": [
                   "default",
