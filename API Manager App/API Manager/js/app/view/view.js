@@ -30,7 +30,7 @@
         }
         catch (err) {
             console.log(err);
-            this.APIManager.APIManagerView.displayMessage('Error occured while registering templates. Please check console for more details!!!');
+            this.displayMessage('Error occured while registering templates. Please check console for more details!!!');
         };
     };
 

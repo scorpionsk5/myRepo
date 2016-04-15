@@ -22,35 +22,35 @@
 
             primaryLink = primaryLink.join('.');
 
-            return { primaryLink: primaryLink, secondaryLink: secondaryLink, scrollToProperty: linkArray[linkArray.length - 1], templatePath: link }
+            return { 'primaryLink': primaryLink, 'secondaryLink': secondaryLink, 'scrollToProperty': linkArray[linkArray.length - 1], 'templatePath': link }
         }
     },
 
         // Methods to load data in main content
         loadMainContent = function (Args) {
+            // Parse contentpath and pass it to loadMainContent method
+            Args.parsedLink = utils.parseObjectLink.call(this, Args.contentPath);
+
             if (Args.isUrlChanged) {
 
                 var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
 
-                // Parse contentpath and pass it to loadMainContent method
-                Args.parsedLink = utils.parseObjectLink.call(this, Args.contentPath);
-
                 // Get required Object by passing data object and path as a arguments 
-                Args.dataObject = this.APIManager.APIManagerModel.getObjectByPath(dataObject, Args.primaryLink);
+                Args.dataObject = this.APIManager.APIManagerModel.getObjectByPath(dataObject, Args.parsedLink.primaryLink);
 
                 try {
                     // Load template with Args object all information regarding displaying data on page and store the compiled template in compiledTemplate variable
-                    Args.dataObject && (compiledTemplate = this.APIManagerView.templates.renderTemplate(Args.templatePath, Args));
+                    Args.dataObject && (compiledTemplate = this.APIManager.APIManagerView.templates.renderTemplate(Args.templatePath, Args));
                 }
                 catch (err) {
                     console.log(err);
-                    this.APIManagerView.displayMessage('Error occured while loading template. Please check console for more details!!!');
+                    this.APIManager.APIManagerView.displayMessage('Error occured while loading template. Please check console for more details!!!');
                 };
 
                 // If template is complied successfully then load the template in container
                 if (compiledTemplate) {
-                    this.APIManagerView.mainContainer.html('');
-                    this.APIManagerView.mainContainer.html(compiledTemplate);
+                    this.APIManager.APIManagerView.mainContainer.html('');
+                    this.APIManager.APIManagerView.mainContainer.html(compiledTemplate);
                 };
             }
 

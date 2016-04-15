@@ -1,19 +1,18 @@
 ﻿#
-var dataObj=data.dataObject, secondaryLink=data.secondaryLink,primaryLink=data.primaryLink;
+var dataObj=data.dataObject, secondaryLink=data.parsedLink.secondaryLink,primaryLink=data.parsedLink.primaryLink;
 var headers=primaryLink.split('.');
 var mainNode= headers[0];
-var me=this;#
+var APIManager=data.APIManager;#
 
-<span>em template</span>
 <!-- If the dataObj is string and starts with '_CommonDescriptions' then get object value from path mentioned -->
-#_.isString(dataObj) && (dataObj.search('_CommonDescriptions') == 0) && (dataObj=me.APIManager.APIManagerModel.getObjectByPath(me.APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
+#_.isString(dataObj) && (dataObj.search('_CommonDescriptions') == 0) && (dataObj=APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
 #
 
 <!-- Print headers, i.e first two levels of sub menu items -->
 <div>
-    <h1 class="contentHeader">#=me.APIManager.APIManagerView.getDescriptionText(headers[0])#</h1>
+    <h1 class="contentHeader">#=APIManager.APIManagerView.getDescriptionText(headers[0])#</h1>
     #if(headers.length>1){#
-    <h2 class="contentHeader">#=me.APIManager.APIManagerView.getDescriptionText(headers[1])#</h2>
+    <h2 class="contentHeader">#=APIManager.APIManagerView.getDescriptionText(headers[1])#</h2>
     #}#
 </div>
 
@@ -25,5 +24,5 @@ var me=this;#
 #}
 else{#
     <!-- Load itemContent template and pass dataObj as argument to load detailed contents -->
-    #=me.templateStore.TemplateCache['templates/itemContent'].call(me,{dataObj:dataObj})#
+    #=APIManager.APIManagerView.templates.renderTemplate('EMTemplates/itemContent.html',{dataObj: dataObj, APIManager: APIManager})#
 #}#
