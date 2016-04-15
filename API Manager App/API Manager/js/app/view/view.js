@@ -1,27 +1,10 @@
-﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'text!../../../data/descriptionText.json', 'nicescroll'], function ($, kendo, _, templateStore, descriptionText) {
-
-    var currentDescriptionTextObject = {},
-
-        // This method returns a method that will fetch corresponding customKeywordText or description text
-        loadDescriptionText = function () {
-            var parsedDescriptionTextObject = JSON.parse(descriptionText), descriptionTextObject = {};
-
-            $.each(parsedDescriptionTextObject, function (moduleName, descriptionObject) {
-                if (moduleName[0] != '_') {
-                    descriptionTextObject[moduleName] = $.extend(true, {}, parsedDescriptionTextObject._CommonConfigurations, descriptionObject || {});
-                };
-            });
-
-            return function (key) {
-                currentDescriptionTextObject = descriptionTextObject[key];
-            };
-        };
+﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'app/view/textDescriptor', 'nicescroll'], function ($, kendo, _, templateStore, textDescriptor) {
 
     // View Class
     var view = function (Args) {
         this.$container = $(Args.container);
         this.APIManager = Args.APIManager;
-        this.setDescriptionText = loadDescriptionText();
+        this.textDescriptor = textDescriptor;
         this.initializePage();
 
         try {
@@ -141,30 +124,6 @@
         this.mainMenuElement.kendoMenu(options);
     };
 
-    //// Method to load data in main content
-    //view.prototype.loadMainContent = function (Args) {
-
-    //    var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
-
-    //    // Get required Object by passing data object and path as a arguments 
-    //    Args.dataObject = this.APIManager.APIManagerModel.getObjectByPath(dataObject, Args.primaryLink);
-
-    //    try {
-    //        // Load template with Args object all information regarding displaying data on page and store the compiled template in compiledTemplate variable
-    //        Args.dataObject && this.templateStore.TemplateCache['templates/mainContent'] && (compiledTemplate = this.templateStore.TemplateCache['templates/mainContent'].call(this, Args));
-    //    }
-    //    catch (err) {
-    //        console.log(err);
-    //        this.displayMessage('Error occured while loading template. Please check console for more details!!!');
-    //    };
-
-    //    // If template is complied successfully then load the template in container
-    //    if (compiledTemplate) {
-    //        this.mainContainer.html('');
-    //        this.mainContainer.html(compiledTemplate);
-    //    };
-    //};
-
     // Method to Adjust scroll to display the required property  
     view.prototype.adjustScroll = function (dataName) {
 
@@ -190,11 +149,6 @@
             title: title || 'Atert!!!'
         });
         this.messageWindow.open().center();  // Open message window and set position to center 
-    };
-
-    // This method returns corresponding customKeywordText or description text
-    view.prototype.getDescriptionText = function (key) {
-        return currentDescriptionTextObject[key] || key;
     };
 
     return view;

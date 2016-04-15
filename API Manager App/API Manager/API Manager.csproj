@@ -63,6 +63,7 @@
     <Content Include="js\app\settingsManager.js" />
     <Content Include="js\app\view\templateStore.js" />
     <Content Include="data\API-Data.json" />
+    <Content Include="js\app\view\textDescriptor.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.js.map" />
     <Content Include="js\lib\underscore-min.js" />
@@ -96,8 +97,6 @@
     <Content Include="stylesheets\kendo.rtl.min.css" />
     <Content Include="stylesheets\StyleSheet.css" />
     <Content Include="stylesheets\texture\highlight.png" />
-    <Content Include="templates\defaultTemplates\itemContent.html" />
-    <Content Include="templates\defaultTemplates\mainContent.html" />
     <Content Include="templates\EMTemplates\itemContent.html" />
     <Content Include="templates\EMTemplates\mainContent.html" />
     <Content Include="Web.config" />

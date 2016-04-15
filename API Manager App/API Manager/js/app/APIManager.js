@@ -23,7 +23,7 @@
             try {
                 this.appSettings.setAppSettings(menuName);
                 this.APIManagerModel.selectObject(menuName);
-                this.APIManagerView.setDescriptionText(menuName);
+                this.APIManagerView.textDescriptor.setDescriptionTextObject(menuName);
             }
             catch (error) {
                 console.log(error);

@@ -10,7 +10,7 @@
     #if(data.header){#
         <!-- Printing headers and applying css class depending on header -->
         #var cssClass='propertyItem';#
-        #(data.header == '_InnerFields' || data.header == '_Arguments') && (data.header = APIManager.APIManagerView.getDescriptionText(data.header)) && (cssClass='')#
+        #(data.header == '_InnerFields' || data.header == '_Arguments') && (data.header = APIManager.APIManagerView.textDescriptor.getDescriptionText(data.header)) && (cssClass='')#
         <h3 class=#=cssClass# data-name="#=data.header#">#=data.header#</h3>
     #}#
 
@@ -32,7 +32,7 @@
             else {#
                 <!-- Printing description key and string -->
                 #var cssClass='',dom='h4';#
-                #(key.charAt(0)=='_') && (key=APIManager.APIManagerView.getDescriptionText(key))#
+                #(key.charAt(0)=='_') && (key=APIManager.APIManagerView.textDescriptor.getDescriptionText(key))#
                 #if(key=='Type'){
                     dom='h3';   cssClass='propertyItem';
                 } else {key=key+':-'}#
@@ -46,7 +46,7 @@
         else if(_.isArray(value)){#
             #var itemClass='';
             if (key=='_AvailableOptions') {
-                key=APIManager.APIManagerView.getDescriptionText(key)#
+                key=APIManager.APIManagerView.textDescriptor.getDescriptionText(key)#
                 <!-- Printing _AvailableOptions in the form of list -->
                 <h4>#=key+':-'#</h4>
                 <div class="itemContent">
