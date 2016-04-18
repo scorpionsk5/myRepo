@@ -2,6 +2,7 @@
 
     var TemplateCache = {}, // kendo template functions
 
+        // Method to make ajax call and fetch template
         fetchTemplate = function (config) {
             config = $.extend(
                 {
@@ -48,6 +49,6 @@
         return this.getTemplate(templateId)(data);
     };
 
-    return new templateStore();
+    return templateStore;
 });
 

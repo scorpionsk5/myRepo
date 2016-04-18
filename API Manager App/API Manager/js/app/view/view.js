@@ -8,8 +8,8 @@
         this.initializePage();
 
         try {
-            // Create Instance of templateStoreClass
-            this.templates = templateStore;
+            // Create Instance of templateStore Class
+            this.templates = new templateStore();
         }
         catch (err) {
             console.log(err);
