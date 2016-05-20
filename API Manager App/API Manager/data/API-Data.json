@@ -203,7 +203,7 @@
               }
             }
           },
-          "_Note": "If both isWidget and submit are set true then isWidget gets preference. If both are false then it uses anchor elementn"
+          "_Note": "If both isWidget and submit are set true then isWidget gets preference. If both are false then it uses anchor element"
         }
       },
       "UrlId": {
