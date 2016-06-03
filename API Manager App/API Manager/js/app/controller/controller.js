@@ -43,7 +43,9 @@
                     var href = $(e.target).attr('href'), urlString = document.URL.split('#');
 
                     // loadContentPage method is call if 'href' attribute of current target element starts with '#'
-                    (href[0] == '#') && me.APIManagerEvents[menuName] && me.APIManagerEvents[menuName].call(me, e, href, { isUrlChanged: utils.isUrlChanged(href, urlString[1]) });
+                    if (href[0] === '#') {
+                        me.APIManagerEvents[menuName] ? me.APIManagerEvents[menuName].call(me, e, href, { isUrlChanged: utils.isUrlChanged(href, urlString[1]) }) : console.warn('There is no Event handler defined for this module!!!');
+                    };
                 }
                 catch (error) {
                     console.log(error);

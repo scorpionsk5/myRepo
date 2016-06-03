@@ -4,10 +4,11 @@
     "_DataType": "DataType",
     "_InnerFields": "Inner Fields",
     "_AvailableOptions": "Available Options",
-    "_Arguments": "Arguments"
+    "_Arguments": "Arguments",
+    "testing": "tEnterprise Manager",
+    "EnterpriseManager": "Enterprise Manager"
   },
   "EnterpriseManager": {
-    "EnterpriseManager": "Enterprise Manager",
     "DNAConfiguration": "DNA Configuration",
     "ImportantMethodsInEM": "Important Methods In EM",
     "WidgetConfigurations": "Widget Configurations"

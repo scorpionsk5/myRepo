@@ -1,4 +1,4 @@
-define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData) {
+define(['underscore', 'jquery'], function (_, $) {
 
     var selectedObject = {};
 
@@ -80,10 +80,11 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
 
         // This method parses raw JSON data to object and returns a method which returns the parsed object
         getDataFromJson: function () {
-            var me = this;
+            var me = this,
+                dataObj = {};
 
             try {
-                var dataObj = modelUtils.customSort.call(me, JSON.parse(rawData));  // Parse raw JSON data to object
+                dataObj = modelUtils.customSort.call(me, JSON.parse(rawData));  // Parse raw JSON data to object
             }
             catch (error) {
                 console.log(error);
@@ -135,6 +136,35 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
             });
 
             return sortedObj;
+        },
+
+        // Method to make load module data by ajax call
+        loadAllModules: function (modulePathObject) {
+            var me = this,
+                moduleData = {};
+
+            try {
+                $.each(modulePathObject, function (moduleName, modulePath) {
+                    $.ajax({
+                        url: modulePath + '.json',
+                        context: me,
+                        cache: false,
+                        async: false,
+                        dataType: 'text',
+                        success: function (rawModuleData) {
+                            moduleData[moduleName] = JSON.parse(rawModuleData);
+                        }
+                    });
+                });
+            }
+            catch (error) {
+                console.log(error);
+                me.APIManager.APIManagerView.displayMessage('Error in parsing data or sorting. Please check console for more details!!!');
+            };
+
+            return function () {
+                return moduleData;
+            }
         }
     };
 
@@ -142,10 +172,10 @@ define(['underscore', 'text!../../../data/API-Data.json'], function (_, rawData)
     var APIManagerModel = function (Args) {
         this.APIManager = Args.APIManager;
 
-        this.selectObject = function (name) { selectedObject = this.getData()[name]; }
+        this.selectObject = function (name) { selectedObject = this.getData()[name]; };
 
         // Now getData method will return JSON parsed data
-        this.getData = modelUtils.getDataFromJson.call(this);
+        this.getData = modelUtils.loadAllModules.call(this, Args.modulesDataPath);
 
         // Now getSelectedDataObject method will return currently selected data
         this.getSelectedDataObject = function () {

@@ -62,7 +62,6 @@
   <ItemGroup>
     <Content Include="js\app\settingsManager.js" />
     <Content Include="js\app\view\templateStore.js" />
-    <Content Include="data\API-Data.json" />
     <Content Include="js\app\view\textDescriptor.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.js.map" />
@@ -71,6 +70,7 @@
     <Content Include="appSettings\appSettings.json" />
     <Content Include="data\descriptionText.json" />
     <Content Include="js\lib\jquery-2.2.2.min.map" />
+    <Content Include="data\modules\EnterpriseManager.json" />
     <None Include="Properties\PublishProfiles\API Manager.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
