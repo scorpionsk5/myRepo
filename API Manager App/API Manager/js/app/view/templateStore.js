@@ -1,4 +1,4 @@
-﻿define(['underscore', 'kendo'], function (_, kendo) {
+﻿define(['jquery', 'kendo'], function ($, kendo) {
 
     var TemplateCache = {}, // kendo template functions
 
@@ -7,7 +7,8 @@
             config = $.extend(
                 {
                     cache: false,
-                    async: false, dataType: 'text'
+                    async: false,
+                    dataType: 'text'
                 }, config);
 
             $.ajax(config);
@@ -34,7 +35,8 @@
         var me = this;
         if (!TemplateCache[templateId]) {
             fetchTemplate({
-                url: 'templates/' + templateId, context: me,
+                url: 'templates/' + templateId,
+                context: me,
                 success: function (template) {
                     me.registerTemplate(templateId, template);
                 }
