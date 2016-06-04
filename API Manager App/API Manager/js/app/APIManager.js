@@ -26,7 +26,7 @@
                 this.APIManagerView.textDescriptor.setDescriptionTextObject(menuName);
             }
             catch (error) {
-                console.log(error);
+                console.error(error);
                 this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
             };
         };

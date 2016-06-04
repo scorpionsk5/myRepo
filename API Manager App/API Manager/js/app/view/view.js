@@ -12,7 +12,7 @@
             this.templates = new templateStore();
         }
         catch (err) {
-            console.log(err);
+            console.error(err);
             this.displayMessage('Error occured while registering templates. Please check console for more details!!!');
         };
     };

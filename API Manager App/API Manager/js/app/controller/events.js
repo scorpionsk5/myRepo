@@ -43,7 +43,7 @@
                     Args.dataObject && (compiledTemplate = this.APIManager.APIManagerView.templates.renderTemplate(Args.templatePath, Args));
                 }
                 catch (err) {
-                    console.log(err);
+                    console.error(err);
                     this.APIManager.APIManagerView.displayMessage('Error occured while loading template. Please check console for more details!!!');
                 };
 

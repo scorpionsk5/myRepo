@@ -87,7 +87,7 @@ define(['underscore', 'jquery'], function (_, $) {
                 dataObj = modelUtils.customSort.call(me, JSON.parse(rawData));  // Parse raw JSON data to object
             }
             catch (error) {
-                console.log(error);
+                console.error(error);
                 this.APIManager.APIManagerView.displayMessage('Error in parsing data or sorting. Please check console for more details!!!');
             };
 
@@ -158,7 +158,7 @@ define(['underscore', 'jquery'], function (_, $) {
                 });
             }
             catch (error) {
-                console.log(error);
+                console.error(error);
                 me.APIManager.APIManagerView.displayMessage('Error in parsing data or sorting. Please check console for more details!!!');
             };
 
@@ -189,7 +189,7 @@ define(['underscore', 'jquery'], function (_, $) {
             }
         }
         catch (error) {
-            console.log(error);
+            console.error(error);
             this.APIManager.APIManagerView.displayMessage('Error in building sub menu items. Please check console for more details!!!');
         };
 
@@ -206,7 +206,7 @@ define(['underscore', 'jquery'], function (_, $) {
             });
         }
         catch (error) {
-            console.log(error);
+            console.error(error);
             this.APIManager.APIManagerView.displayMessage('Error in building main menu items. Please check console for more details!!!');
         };
 
@@ -225,7 +225,7 @@ define(['underscore', 'jquery'], function (_, $) {
                 });
             }
             catch (error) {
-                console.log(error);
+                console.error(error);
                 this.APIManager.APIManagerView.displayMessage('Object is undefined. Please check console for more details!!!');
             };
 
