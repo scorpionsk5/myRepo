@@ -13,6 +13,7 @@
 
             $.ajax(config);
         };
+
     // Template store class
     var templateStore = function () {
 
