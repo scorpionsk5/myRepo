@@ -4,12 +4,11 @@
 
         // Method to make ajax call and fetch template
         fetchTemplate = function (config) {
-            config = $.extend(
-                {
-                    cache: false,
-                    async: false,
-                    dataType: 'text'
-                }, config);
+            config = $.extend({
+                cache: false,
+                async: false,
+                dataType: 'text'
+            }, config);
 
             $.ajax(config);
         };

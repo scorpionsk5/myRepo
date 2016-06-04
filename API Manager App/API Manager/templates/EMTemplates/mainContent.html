@@ -2,7 +2,8 @@
 var dataObj=data.dataObject, secondaryLink=data.parsedLink.secondaryLink,primaryLink=data.parsedLink.primaryLink;
 var headers=primaryLink.split('.');
 var mainNode= headers[0];
-var APIManager=data.APIManager;#
+var APIManager=data.APIManager;
+#
 
 <!-- If the dataObj is string and starts with '_CommonDescriptions' then get object value from path mentioned -->
 #_.isString(dataObj) && (dataObj.search('_CommonDescriptions') == 0) && (dataObj=APIManager.APIManagerModel.getObjectByPath(APIManager.APIManagerModel.getSelectedDataObject(), dataObj)) 
