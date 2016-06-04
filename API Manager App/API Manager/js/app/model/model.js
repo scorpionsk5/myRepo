@@ -176,12 +176,6 @@ define(['underscore', 'jquery'], function (_, $) {
 
         // Now getData method will return JSON parsed data
         this.getData = modelUtils.loadAllModules.call(this, Args.modulesDataPath);
-
-        // Now getSelectedDataObject method will return currently selected data
-        this.getSelectedDataObject = function () {
-            return selectedObject;
-        };
-
     };
 
     // Method to generates data for kendo menu or tree view data source
@@ -237,6 +231,11 @@ define(['underscore', 'jquery'], function (_, $) {
 
             return dataObject;
         };
+    };
+
+    // Method that will return currently selected module's data
+    APIManagerModel.prototype.getSelectedDataObject = function () {
+        return selectedObject;
     };
 
     return APIManagerModel;
