@@ -78,24 +78,6 @@ define(['underscore', 'jquery'], function (_, $) {
             return list;
         },
 
-        // This method parses raw JSON data to object and returns a method which returns the parsed object
-        getDataFromJson: function () {
-            var me = this,
-                dataObj = {};
-
-            try {
-                dataObj = modelUtils.customSort.call(me, JSON.parse(rawData));  // Parse raw JSON data to object
-            }
-            catch (error) {
-                console.error(error);
-                this.APIManager.APIManagerView.displayMessage('Error in parsing data or sorting. Please check console for more details!!!');
-            };
-
-            return function () {
-                return dataObj
-            }
-        },
-
         // Method to apply custom sort
         customSort: function (dataObj, skipSort) {
             var sortedObj = {}, sortedList = [], me = this, settings = me.APIManager.appSettings.getAppSettings();
@@ -152,14 +134,14 @@ define(['underscore', 'jquery'], function (_, $) {
                         async: false,
                         dataType: 'text',
                         success: function (rawModuleData) {
-                            moduleData[moduleName] = JSON.parse(rawModuleData);
+                            moduleData[moduleName] = modelUtils.customSort.call(me, JSON.parse(rawModuleData));
                         }
                     });
                 });
             }
             catch (error) {
                 console.error(error);
-                me.APIManager.APIManagerView.displayMessage('Error in parsing data or sorting. Please check console for more details!!!');
+                me.APIManager.APIManagerView.displayMessage('Error occured while parsing data or sorting. Please check console for more details!!!');
             };
 
             return function () {
@@ -172,10 +154,10 @@ define(['underscore', 'jquery'], function (_, $) {
     var APIManagerModel = function (Args) {
         this.APIManager = Args.APIManager;
 
-        this.selectObject = function (name) { selectedObject = this.getData()[name]; };
+        this.selectObject = function (name) { selectedObject = this.getAllModulesData()[name]; };
 
-        // Now getData method will return JSON parsed data
-        this.getData = modelUtils.loadAllModules.call(this, Args.modulesDataPath);
+        // Now getAllModulesData method will return all JSON parsed data
+        this.getAllModulesData = modelUtils.loadAllModules.call(this, Args.moduleDataPath);
     };
 
     // Method to generates data for kendo menu or tree view data source
@@ -190,7 +172,7 @@ define(['underscore', 'jquery'], function (_, $) {
         }
         catch (error) {
             console.error(error);
-            this.APIManager.APIManagerView.displayMessage('Error in building sub menu items. Please check console for more details!!!');
+            this.APIManager.APIManagerView.displayMessage('Error occured while building sub menu items. Please check console for more details!!!');
         };
 
         return menuTree;
@@ -201,13 +183,13 @@ define(['underscore', 'jquery'], function (_, $) {
         var mainMenuList = [], me = this;
 
         try {
-            $.each(this.getData(), function (key) {
+            $.each(this.getAllModulesData(), function (key) {
                 mainMenuList.push({ text: me.APIManager.APIManagerView.textDescriptor.getDescriptionText(key), url: '?menu=' + key });
             });
         }
         catch (error) {
             console.error(error);
-            this.APIManager.APIManagerView.displayMessage('Error in building main menu items. Please check console for more details!!!');
+            this.APIManager.APIManagerView.displayMessage('Error occured while building main menu items. Please check console for more details!!!');
         };
 
         return mainMenuList;
@@ -226,7 +208,7 @@ define(['underscore', 'jquery'], function (_, $) {
             }
             catch (error) {
                 console.error(error);
-                this.APIManager.APIManagerView.displayMessage('Object is undefined. Please check console for more details!!!');
+                this.APIManager.APIManagerView.displayMessage('Module data object is undefined. Please check console for more details!!!');
             };
 
             return dataObject;

@@ -7,7 +7,7 @@
 
         // Instantiation of Model, View and Controller
         this.APIManagerView = new view({ APIManager: this, container: document.body });
-        this.APIManagerModel = new model({ APIManager: this, modulesDataPath: this.appSettings.getAllModulesPath() });
+        this.APIManagerModel = new model({ APIManager: this, moduleDataPath: this.appSettings.getAllModulesPath() });
         this.APIManagerController = new controller({ APIManager: this });
     };
 
@@ -27,7 +27,7 @@
             }
             catch (error) {
                 console.error(error);
-                this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
+                this.APIManager.APIManagerView.displayMessage('Error occured while selecting main menu. Please check console for more details!!!');
             };
         };
 
@@ -46,7 +46,7 @@
         // This will load data when page is refreshed and also object path is mentioned in url
         if (urlString.indexOf('#') > -1) {
             urlPath = urlString.split('#'); // Splitting url string by '#' and passing string after # tag as argument to loadContentPage method
-            this.APIManagerController.APIManagerEvents[menuName] ? this.APIManagerController.APIManagerEvents[menuName].call(this.APIManagerController, null, urlPath[1], { isUrlChanged: true }) : console.warn('There is no Event handler defined for this module!!!');    // Here 'null' is passed beacuse method is not called by event handler
+            this.APIManagerController.APIManagerEvents[menuName] ? this.APIManagerController.APIManagerEvents[menuName].call(this.APIManagerController, null, urlPath[1], { isPrimaryObjectPathChanged: true }) : console.warn('There is no Event handler defined for this module!!!');    // Here 'null' is passed beacuse method is not called by event handler
         };
 
         // Remove loading animation
