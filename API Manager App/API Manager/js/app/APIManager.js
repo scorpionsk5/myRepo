@@ -7,7 +7,7 @@
 
         // Instantiation of Model, View and Controller
         this.APIManagerView = new view({ APIManager: this, container: document.body });
-        this.APIManagerModel = new model({ APIManager: this, modulesDataPath: this.appSettings.getAllModulesPath() });
+        this.APIManagerModel = new model({ APIManager: this, moduleDataPath: this.appSettings.getAllModulesPath() });
         this.APIManagerController = new controller({ APIManager: this });
     };
 

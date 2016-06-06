@@ -69,10 +69,8 @@
 
         // Method to load required content on page
         EnterpriseManager: function (e, contentPath, options) {
-            var APIManager = this.APIManager || this;
-
             // Call loadMainContent to load content
-            loadMainContent.call(this, _.extend({}, { APIManager: APIManager, e: e, templatePath: 'EMTemplates/mainContent.html', contentPath: contentPath }, options));
+            loadMainContent.call(this, _.extend({}, { 'APIManager': this.APIManager, 'e': e, 'templatePath': 'EMTemplates/mainContent.html', 'contentPath': contentPath }, options));
         }
     };
 

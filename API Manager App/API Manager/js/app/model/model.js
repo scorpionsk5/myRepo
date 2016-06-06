@@ -154,10 +154,10 @@ define(['underscore', 'jquery'], function (_, $) {
     var APIManagerModel = function (Args) {
         this.APIManager = Args.APIManager;
 
-        this.selectObject = function (name) { selectedObject = this.getData()[name]; };
+        this.selectObject = function (name) { selectedObject = this.getAllModulesData()[name]; };
 
-        // Now getData method will return JSON parsed data
-        this.getData = modelUtils.loadAllModules.call(this, Args.modulesDataPath);
+        // Now getAllModulesData method will return all JSON parsed data
+        this.getAllModulesData = modelUtils.loadAllModules.call(this, Args.moduleDataPath);
     };
 
     // Method to generates data for kendo menu or tree view data source
@@ -183,7 +183,7 @@ define(['underscore', 'jquery'], function (_, $) {
         var mainMenuList = [], me = this;
 
         try {
-            $.each(this.getData(), function (key) {
+            $.each(this.getAllModulesData(), function (key) {
                 mainMenuList.push({ text: me.APIManager.APIManagerView.textDescriptor.getDescriptionText(key), url: '?menu=' + key });
             });
         }
