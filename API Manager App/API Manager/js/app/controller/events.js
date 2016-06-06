@@ -31,7 +31,7 @@
             // Parse contentpath and pass it to loadMainContent method
             Args.parsedLink = utils.parseObjectLink.call(this, Args.contentPath);
 
-            if (Args.isUrlChanged) {
+            if (Args.isPrimaryObjectPathChanged) {
 
                 var dataObject = this.APIManager.APIManagerModel.getSelectedDataObject(), compiledTemplate = '';
 

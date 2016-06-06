@@ -3,7 +3,7 @@
     // Utility object, where miscellaneous methods are written, these methods are used by Controller
     var utils = {
         // Method to compare url of current page and href and returns boolean value
-        isUrlChanged: function (href, urlstring) {
+        isPrimaryObjectPathChanged: function (href, urlstring) {
             var hrefArray = [], urlstringArray = [];
 
             // Returns 'true' if urlString is undefined or doesn't matches with href
@@ -44,7 +44,7 @@
 
                     // loadContentPage method is call if 'href' attribute of current target element starts with '#'
                     if (href[0] === '#') {
-                        me.APIManagerEvents[menuName] ? me.APIManagerEvents[menuName].call(me, e, href, { isUrlChanged: utils.isUrlChanged(href, urlString[1]) }) : console.warn('There is no Event handler defined for this module!!!');
+                        me.APIManagerEvents[menuName] ? me.APIManagerEvents[menuName].call(me, e, href, { isPrimaryObjectPathChanged: utils.isPrimaryObjectPathChanged(href, urlString[1]) }) : console.warn('There is no Event handler defined for this module!!!');
                     };
                 }
                 catch (error) {

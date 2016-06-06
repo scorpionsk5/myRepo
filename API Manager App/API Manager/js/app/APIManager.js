@@ -46,7 +46,7 @@
         // This will load data when page is refreshed and also object path is mentioned in url
         if (urlString.indexOf('#') > -1) {
             urlPath = urlString.split('#'); // Splitting url string by '#' and passing string after # tag as argument to loadContentPage method
-            this.APIManagerController.APIManagerEvents[menuName] ? this.APIManagerController.APIManagerEvents[menuName].call(this.APIManagerController, null, urlPath[1], { isUrlChanged: true }) : console.warn('There is no Event handler defined for this module!!!');    // Here 'null' is passed beacuse method is not called by event handler
+            this.APIManagerController.APIManagerEvents[menuName] ? this.APIManagerController.APIManagerEvents[menuName].call(this.APIManagerController, null, urlPath[1], { isPrimaryObjectPathChanged: true }) : console.warn('There is no Event handler defined for this module!!!');    // Here 'null' is passed beacuse method is not called by event handler
         };
 
         // Remove loading animation
