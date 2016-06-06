@@ -78,24 +78,6 @@ define(['underscore', 'jquery'], function (_, $) {
             return list;
         },
 
-        // This method parses raw JSON data to object and returns a method which returns the parsed object
-        getDataFromJson: function () {
-            var me = this,
-                dataObj = {};
-
-            try {
-                dataObj = modelUtils.customSort.call(me, JSON.parse(rawData));  // Parse raw JSON data to object
-            }
-            catch (error) {
-                console.error(error);
-                this.APIManager.APIManagerView.displayMessage('Error in parsing data or sorting. Please check console for more details!!!');
-            };
-
-            return function () {
-                return dataObj
-            }
-        },
-
         // Method to apply custom sort
         customSort: function (dataObj, skipSort) {
             var sortedObj = {}, sortedList = [], me = this, settings = me.APIManager.appSettings.getAppSettings();
@@ -152,7 +134,7 @@ define(['underscore', 'jquery'], function (_, $) {
                         async: false,
                         dataType: 'text',
                         success: function (rawModuleData) {
-                            moduleData[moduleName] = JSON.parse(rawModuleData);
+                            moduleData[moduleName] = modelUtils.customSort.call(me, JSON.parse(rawModuleData));
                         }
                     });
                 });
