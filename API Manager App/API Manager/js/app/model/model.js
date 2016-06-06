@@ -141,7 +141,7 @@ define(['underscore', 'jquery'], function (_, $) {
             }
             catch (error) {
                 console.error(error);
-                me.APIManager.APIManagerView.displayMessage('Error in parsing data or sorting. Please check console for more details!!!');
+                me.APIManager.APIManagerView.displayMessage('Error occured while parsing data or sorting. Please check console for more details!!!');
             };
 
             return function () {
@@ -172,7 +172,7 @@ define(['underscore', 'jquery'], function (_, $) {
         }
         catch (error) {
             console.error(error);
-            this.APIManager.APIManagerView.displayMessage('Error in building sub menu items. Please check console for more details!!!');
+            this.APIManager.APIManagerView.displayMessage('Error occured while building sub menu items. Please check console for more details!!!');
         };
 
         return menuTree;
@@ -189,7 +189,7 @@ define(['underscore', 'jquery'], function (_, $) {
         }
         catch (error) {
             console.error(error);
-            this.APIManager.APIManagerView.displayMessage('Error in building main menu items. Please check console for more details!!!');
+            this.APIManager.APIManagerView.displayMessage('Error occured while building main menu items. Please check console for more details!!!');
         };
 
         return mainMenuList;
@@ -208,7 +208,7 @@ define(['underscore', 'jquery'], function (_, $) {
             }
             catch (error) {
                 console.error(error);
-                this.APIManager.APIManagerView.displayMessage('Object is undefined. Please check console for more details!!!');
+                this.APIManager.APIManagerView.displayMessage('Module data object is undefined. Please check console for more details!!!');
             };
 
             return dataObject;

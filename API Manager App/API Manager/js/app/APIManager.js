@@ -27,7 +27,7 @@
             }
             catch (error) {
                 console.error(error);
-                this.APIManager.APIManagerView.displayMessage('Error in selecting main menu. Please check console for more details!!!');
+                this.APIManager.APIManagerView.displayMessage('Error occured while selecting main menu. Please check console for more details!!!');
             };
         };
 
