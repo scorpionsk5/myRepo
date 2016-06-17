@@ -1,5 +1,4 @@
-﻿/// <reference path="~/js/lib/kendo.all-vsdoc.js" />
-/// <reference path="~/js/lib/require.js" />
+﻿/// <reference path="~/js/lib/require.js" />
 
 requirejs.config({
     baseUrl: '~/js',
