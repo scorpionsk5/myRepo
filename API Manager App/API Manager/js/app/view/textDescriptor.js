@@ -1,5 +1,5 @@
 ﻿define('app/view/textDescriptor', ['jquery', 'text!../../../data/descriptionText.json'], function ($, descriptionTextJSON) {
-
+    
     var currentDescriptionTextObject = {},
 
         // This method returns a method that will fetch corresponding customKeywordText or description text

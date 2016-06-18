@@ -23,7 +23,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,6 +67,7 @@
     <Content Include="js\app\view\textDescriptor.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.js.map" />
+    <None Include="js\lib\require.intellisense.js" />
     <Content Include="js\lib\underscore-min.js" />
     <Content Include="js\lib\underscore-min.map" />
     <Content Include="appSettings\appSettings.json" />
