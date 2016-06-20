@@ -1,5 +1,5 @@
 ﻿define(['jquery', 'kendo'], function ($, kendo) {
-
+    
     var TemplateCache = {}, // kendo template functions
 
         // Method to make ajax call and fetch template

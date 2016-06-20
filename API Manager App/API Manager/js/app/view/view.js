@@ -1,5 +1,5 @@
 ﻿define(['jquery', 'kendo', 'underscore', 'app/view/templateStore', 'app/view/textDescriptor', 'nicescroll'], function ($, kendo, _, templateStore, textDescriptor) {
-
+    
     // View Class
     var view = function (Args) {
         this.$container = $(Args.container);
@@ -58,7 +58,7 @@
             bouncescroll: true,
             cursorcolor: scrollBarColor,
             autohidemode: false,
-            grabcursorenabled: false,
+            grabcursorenabled: false
         });
 
         // Creating popup window to display messages

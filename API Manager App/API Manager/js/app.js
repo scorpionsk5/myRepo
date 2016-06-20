@@ -1,12 +1,12 @@
 ﻿(function () {
     // requireJs configuration
-    require.config({
+    requirejs.config({
         baseUrl: 'js',
         paths: {
-            jquery: 'lib/jquery-2.2.2.min',
-            kendo: 'lib/kendo.all.min',
+            jquery: 'lib/jquery',
+            kendo: 'lib/kendo',
             text: 'lib/text',
-            underscore: 'lib/underscore-min',
+            underscore: 'lib/underscore',
             nicescroll: 'lib/nicescroll'
         },
         waitSeconds: 0
