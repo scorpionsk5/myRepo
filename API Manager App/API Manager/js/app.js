@@ -1,7 +1,7 @@
 ﻿(function () {
     // requireJs configuration
     requirejs.config({
-        baseUrl: 'js',
+        baseUrl: '~/js',
         paths: {
             jquery: 'lib/jquery-2.2.2.min',
             kendo: 'lib/kendo.all.min',

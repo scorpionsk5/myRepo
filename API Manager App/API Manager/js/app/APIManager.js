@@ -1,5 +1,5 @@
 ﻿define(['app/model/model', 'app/view/view', 'app/controller/controller', 'app/settingsManager'], function (model, view, controller, settingsManager) {
-
+    
     // API Manager Application
     var APIManager = function () {
 
