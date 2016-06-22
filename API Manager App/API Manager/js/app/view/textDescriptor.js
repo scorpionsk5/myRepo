@@ -1,4 +1,4 @@
-﻿define(['jquery', 'text!../../../data/descriptionText.json'], function ($, descriptionTextJSON) {
+﻿define(['text!../../../data/descriptionText.json'], function (descriptionTextJSON) {
     
     var currentDescriptionTextObject = {},
 

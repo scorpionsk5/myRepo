@@ -1,4 +1,4 @@
-﻿define(['jquery', 'kendo'], function ($, kendo) {
+﻿define([], function () {
     
     var TemplateCache = {}, // kendo template functions
 
@@ -15,7 +15,7 @@
 
     // Template store class
     var templateStore = function () {
-
+        
     };
 
     // Method to convert template html string to kendo template function

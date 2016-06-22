@@ -1,4 +1,4 @@
-﻿define(['jquery', 'app/controller/events'], function ($, events) {
+﻿define(['app/controller/events'], function (events) {
     
     // Utility object, where miscellaneous methods are written, these methods are used by Controller
     var utils = {

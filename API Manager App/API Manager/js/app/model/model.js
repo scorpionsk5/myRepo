@@ -1,4 +1,4 @@
-define(['underscore', 'jquery'], function (_, $) {
+define([], function () {
 
     var selectedObject = {};
 

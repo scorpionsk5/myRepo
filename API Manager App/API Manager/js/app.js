@@ -1,7 +1,7 @@
 ﻿(function () {
     // requireJs configuration
     requirejs.config({
-        baseUrl: '~/js',
+        baseUrl: 'js',
         paths: {
             jquery: 'lib/jquery-2.2.2.min',
             kendo: 'lib/kendo.all.min',
@@ -9,10 +9,16 @@
             underscore: 'lib/underscore-min',
             nicescroll: 'lib/nicescroll'
         },
+        shim: {
+            'app/APIManager': {
+                deps: ['jquery', 'kendo', 'underscore', 'nicescroll']
+            }
+        },
         waitSeconds: 0
     });
 
     require(['app/APIManager'], function (APIManagerApp) {
+
         //Start APIManager app
         var APIManager = new APIManagerApp();
         APIManager.start();

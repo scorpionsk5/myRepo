@@ -1,13 +1,5 @@
-﻿/// <autosync enabled="true" />
-/// <reference path="~/js/lib/require.js" />
-
-//requirejs.config({
-//    //baseUrl:'~/js/',
-//    paths: {
-//        jquery: '~/js/lib/jquery-2.2.2.min',
-//        kendo: '~/js/lib/kendo.all.min',
-//        text: '~/js/lib/text',
-//        underscore: '~/js/lib/underscore-min',
-//        nicescroll: '~/js/lib/nicescroll'
-//    }
-//});
+﻿/// <reference path="lib/require.js" />
+/// <reference path="lib/jquery-2.2.2.min.js" />
+/// <reference path="lib/underscore-min.js" />
+/// <reference path="lib/kendo.all.min.js" />
+/// <reference path="lib/nicescroll.js" />

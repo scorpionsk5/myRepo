@@ -67,7 +67,6 @@
     <Content Include="js\app\view\textDescriptor.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.map" />
-    <None Include="js\lib\require.intellisense.js" />
     <Content Include="js\lib\underscore-min.js" />
     <Content Include="js\lib\underscore-min.map" />
     <Content Include="appSettings\appSettings.json" />

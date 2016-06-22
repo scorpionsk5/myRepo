@@ -1,4 +1,4 @@
-﻿define(['text!../../../appSettings/appSettings.json', 'jquery'], function (settings, $) {
+﻿define(['text!../../../appSettings/appSettings.json'], function (settings) {
     var currentSettings = {},
         modulesDataPath = {},
 
