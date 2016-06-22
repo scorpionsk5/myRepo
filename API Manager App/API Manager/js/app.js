@@ -6,7 +6,8 @@ requirejs.config({
         kendo: 'lib/kendo.all.min',
         text: 'lib/text',
         underscore: 'lib/underscore-min',
-        nicescroll: 'lib/nicescroll'
+        nicescroll: 'lib/nicescroll',
+        APIManagerApp:'app/APIManager'
     },
     shim: {
         'APIManagerApp': {
