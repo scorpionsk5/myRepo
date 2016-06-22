@@ -1,5 +1,5 @@
 ﻿define(['app/view/templateStore', 'app/view/textDescriptor'], function (templateStore, textDescriptor) {
-
+    
     // View Class
     var view = function (Args) {
         this.$container = $(Args.container);
@@ -124,7 +124,7 @@
         this.mainMenuElement.kendoMenu(options);
     };
 
-    // Method to Adjust scroll to display the required property  
+    // Method to Adjust scroll to display the required property. It take one argument, data name of the element to be scrolled.
     view.prototype.adjustScroll = function (dataName) {
 
         var scrollTop, scrollItem;
@@ -142,7 +142,7 @@
         this.mainContainer.scrollTop(scrollTop);
     };
 
-    // Method to display alert message on popup window
+    // Method to display alert message on popup window. It takes two arguments, message to be displayed and title for the message window.
     view.prototype.displayMessage = function (message, title) {
         this.messageWindow.content(message);    // Load content text or HTML
         this.messageWindow.setOptions({     // Set title to message window
