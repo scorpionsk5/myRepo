@@ -3,3 +3,4 @@
 /// <reference path="lib/underscore-min.js" />
 /// <reference path="lib/kendo.all.min.js" />
 /// <reference path="lib/nicescroll.js" />
+/// <reference path="app/APIManager.js" />

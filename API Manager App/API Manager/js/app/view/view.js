@@ -1,5 +1,5 @@
 ﻿define(['app/view/templateStore', 'app/view/textDescriptor'], function (templateStore, textDescriptor) {
-    
+
     // View Class
     var view = function (Args) {
         this.$container = $(Args.container);
