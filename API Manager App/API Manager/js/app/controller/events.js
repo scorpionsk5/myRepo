@@ -1,4 +1,4 @@
-﻿define(['underscore'], function (_) {
+﻿define([], function () {
 
     // Utility object, where miscellaneous methods are written, these methods are used by event handlers
     var utils = {

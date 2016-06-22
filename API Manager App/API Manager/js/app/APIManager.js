@@ -1,4 +1,4 @@
-﻿define(['app/model/model', 'app/view/view', 'app/controller/controller', 'app/settingsManager'], function (model, view, controller, settingsManager) {
+﻿define('APIManagerApp', ['app/model/model', 'app/view/view', 'app/controller/controller', 'app/settingsManager'], function (model, view, controller, settingsManager) {
 
     // API Manager Application
     var APIManager = function () {
@@ -11,6 +11,7 @@
         this.APIManagerController = new controller({ APIManager: this });
     };
 
+    // Method to start API manager application. Takes no arguments
     APIManager.prototype.start = function () {
 
         // Reading url string to load previously loaded page
