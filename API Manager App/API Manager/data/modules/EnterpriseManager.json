@@ -873,7 +873,7 @@
           "_DataType": "Boolean"
         },
         "isSingletonQuery": {
-          "_Description": "If set false it gets the extended query ID and set it as ViewModel path, default value is 'true'",
+          "_Description": "If set true and query is already loaded by other widget, then it uses the same query and data to the new widget which is being loaded. If set false and even if query is already loaded by other widget it creates new query with widget ID prefixed to the query ID, default value is 'true'",
           "_DataType": "Boolean"
         },
         "resetQuery": {
