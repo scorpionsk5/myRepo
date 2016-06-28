@@ -26,20 +26,9 @@ body {
     width: 78.5% !important;
 }
 
-/*.menuElement .k-sprite {
-    background-image: url(Default/sprite.png);
-}
-
-.expandable {
-    background-position: 0;
-}
-
-.nonExpandable {
-    background-position: 0;
-}*/
-
 .itemContent {
     margin-left: 30px;
+    margin-right: 15px;
 }
 
 .arrayItems {
