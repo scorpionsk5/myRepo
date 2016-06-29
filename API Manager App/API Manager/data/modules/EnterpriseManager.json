@@ -78,7 +78,7 @@
       "_DataType": "Boolean"
     },
     "Class": {
-      "_Description": "Css Class to be applied to dom element or the perticular block",
+      "_Description": "Css Class to be applied to dom element or the particular block",
       "_DataType": "String"
     },
     "Action": {
@@ -244,7 +244,7 @@
           "_DataType": "String"
         },
         "Class": {
-          "_Description": "Class of the created dom element or the perticular block",
+          "_Description": "Class of the created dom element or the particular block",
           "_DataType": "String"
         },
         "Attr": {
