@@ -86,7 +86,7 @@ define([], function () {
 
                 // Build a sorted list of widget properties in which data should be orderd
                 $.each(dataObj, function (key) {
-                    (_.indexOf(_.union(settings.PreSortedContents, settings.PostSortedContents), key) == -1) && sortedList.push(key);
+                    (_.indexOf(_.union(settings.UpperSortedContents, settings.LowerSortedContents), key) == -1) && sortedList.push(key);
                 });
 
                 // Sort items
@@ -96,7 +96,7 @@ define([], function () {
                     return a1 > b1 ? 1 : -1;
                 });
 
-                sortedList = _.union(settings.PreSortedContents, sortedList, settings.PostSortedContents);
+                sortedList = _.union(settings.UpperSortedContents, sortedList, settings.LowerSortedContents);
             }
             else {
                 // It skips custom sorting for the properties of current dataObj

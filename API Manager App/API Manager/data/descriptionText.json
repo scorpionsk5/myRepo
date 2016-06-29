@@ -1,11 +1,10 @@
 ﻿{
-  "_CommonConfigurations": {
+  "_CommonDescriptions": {
     "_Description": "Description",
     "_DataType": "DataType",
     "_InnerFields": "Inner Fields",
     "_AvailableOptions": "Available Options",
     "_Arguments": "Arguments",
-    "testing": "tEnterprise Manager",
     "EnterpriseManager": "Enterprise Manager"
   },
   "EnterpriseManager": {
