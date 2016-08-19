@@ -1,4 +1,4 @@
-﻿define(['react', 'jquery', 'kendo'], function (react) {
+﻿define(['react', 'jquery', 'kendo'], function () {
 
     
 
