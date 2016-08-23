@@ -11,14 +11,14 @@
         'kendo': {
             deps: ['jquery']
         },
-        'app': {
+        'app/app': {
             deps: ['kendo']
         }
     },
     waitSeconds: 0
 });
 
-require(['app'], function (App) {
+require(['app/app'], function (App) {
 
     var $container = $(document.body),
         app = new App($container);
