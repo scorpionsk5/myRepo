@@ -4,7 +4,7 @@
             console.log('model');
         },
 
-        postInit: function (appInstance) {
+        load: function (appInstance) {
             this.app = appInstance;
         }
     });

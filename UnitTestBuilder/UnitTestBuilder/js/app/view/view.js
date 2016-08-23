@@ -1,4 +1,4 @@
-﻿define(function () {
+﻿define(['app/view/testBuilder', 'nicescroll'], function (TestBuilder) {
     var utils = {
         createElement: function (element, properties) {
             var newElement = $('<' + element + '>');
@@ -21,18 +21,17 @@
 
         View = kendo.Class.extend({
             init: function ($container) {
-                this.$container = $container;
                 var $mainContainer = utils.createElement('div', { cssClass: 'MainContainer' }),
                     $caseBuilderContainer = utils.createElement('div', { cssClass: 'CaseBuilderContainer' });
 
                 $mainContainer.append([utils.createElement('div', { cssClass: 'MainMenu' }), $caseBuilderContainer]);
-                $mainContainer.appendTo(this.$container);
+                $mainContainer.appendTo($container);
 
                 this.$mainContainer = $mainContainer;
                 this.$caseBuilderContainer = $caseBuilderContainer;
             },
 
-            postInit: function (appInstance) {
+            render: function (appInstance) {
                 this.app = appInstance;
                 this.buildMenu();
             },
@@ -42,12 +41,6 @@
             },
 
             addCase: function () {
-
-            },
-
-            _buildCaseView: function () {
-                var $caseView = utils.createElement('div', { cssClass: 'CaseView' }),
-                    $caseName = utils.createElement('input', { cssClass: 'k-textbox k-input' });
 
             }
         });

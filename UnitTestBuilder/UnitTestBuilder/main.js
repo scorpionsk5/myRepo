@@ -1,16 +1,18 @@
 ﻿require.config({
     baseUrl: 'js',
     paths: {
-        jquery: 'lib/jquery-2.1.4',
-        kendo: 'lib/kendo',
-        QUnit: 'lib/QUnit'
+        jquery: 'lib/jquery-2.2.2.min',
+        kendo: 'lib/kendo.all.min',
+        QUnit: 'lib/QUnit',
+        underscore: 'lib/underscore-min',
+        nicescroll: 'lib/nicescroll'
     },
     shim: {
         'kendo': {
             deps: ['jquery']
         },
         'app': {
-            deps: ['kendo', 'QUnit']
+            deps: ['kendo']
         }
     },
     waitSeconds: 0
@@ -21,6 +23,6 @@ require(['app'], function (App) {
     var $container = $(document.body),
         app = new App($container);
 
-    app.loadApplication();
+    app.startApplication();
 
 });

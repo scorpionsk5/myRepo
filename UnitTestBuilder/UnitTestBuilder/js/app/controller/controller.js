@@ -4,7 +4,7 @@
             console.log('controller');
         },
 
-        postInit: function (appInstance) {
+        start: function (appInstance) {
             this.app = appInstance;
         }
     });

@@ -66,10 +66,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\StyleSheet.css" />
+    <Content Include="css\main.css" />
     <Content Include="img\background.png" />
     <Content Include="img\black-background.jpeg" />
+    <Content Include="js\app\view\templateStore.js" />
+    <Content Include="js\app\view\templates\TestBuilder.html" />
+    <Content Include="js\app\view\templates\TestCaseItem.html" />
+    <Content Include="js\app\view\testBuilder.js" />
+    <Content Include="js\lib\jquery-2.2.2.min.js" />
+    <Content Include="js\lib\kendo.all.min.js" />
+    <Content Include="js\lib\nicescroll.js" />
+    <Content Include="js\lib\require.js" />
+    <Content Include="js\lib\underscore-min.js" />
     <Content Include="packages.config" />
+    <Content Include="css\main.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -84,10 +94,7 @@
     <Content Include="js\app\controller\controller.js" />
     <Content Include="js\app\model\model.js" />
     <Content Include="js\app\view\view.js" />
-    <Content Include="js\lib\jquery-2.1.4.js" />
-    <Content Include="js\lib\kendo.js" />
     <Content Include="js\lib\QUnit.js" />
-    <Content Include="js\lib\requireJs.js" />
     <Content Include="Web.config" />
     <None Include="_references.js" />
   </ItemGroup>
@@ -127,6 +134,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>CD "$(SolutionDir)packages\WinLess.lessc*\tools"
+CALL lessc "$(ProjectDir)css\main.less" "$(ProjectDir)css\main.css" --yui-compress</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
