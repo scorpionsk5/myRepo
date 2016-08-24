@@ -1042,13 +1042,16 @@
         "_DataType": "Object",
         "_InnerFields": {
           "Src": {
-            "_Description": "Path of the image file",
+            "_Description": "Path of the image file, this path can also be localized",
             "_DataType": "String"
           }
         }
       },
       "Config": {
-        "Class": "_CommonDescriptions.Class"
+        "Class": {
+          "_Description": "Class for img html element",
+          "_DataType": "String"
+        }
       }
     },
     "APListView": {
