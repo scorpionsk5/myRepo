@@ -80,6 +80,7 @@
     <Content Include="js\lib\underscore-min.js" />
     <Content Include="packages.config" />
     <Content Include="css\main.less" />
+    <None Include="Properties\PublishProfiles\QUnitTestBuilder.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
