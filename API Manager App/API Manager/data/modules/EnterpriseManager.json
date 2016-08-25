@@ -476,11 +476,11 @@
       "Type": "APBackground",
       "Config": {
         "Class": {
-          "_Description": "CSS Class to be applied and also it uses 'img' tag and sets image path",
+          "_Description": "CSS Class to be applied to html element and also it uses 'img' element and sets image path",
           "_DataType": "String"
         },
         "Repeat": {
-          "_Description": "CSS Class to be applied and also it uses 'div' tag and sets background image, 'Repeat' takes precedence over 'class'",
+          "_Description": "CSS Class to be applied to html element and also it uses 'div' element and sets background image, 'Repeat' takes precedence over 'class'",
           "_DataType": "String"
         },
         "Images": {

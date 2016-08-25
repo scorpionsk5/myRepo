@@ -136,8 +136,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>CD "$(SolutionDir)packages\WinLess.lessc*\tools"
-CALL lessc "$(ProjectDir)css\main.less" "$(ProjectDir)css\main.css" --yui-compress</PreBuildEvent>
+    <PreBuildEvent>ECHO Compiling LESS file into CSS file
+CD "$(SolutionDir)packages\WinLess.lessc*\tools"
+CALL lessc "$(ProjectDir)css\main.less" "$(ProjectDir)css\main.css" --yui-compress
+ECHO CSS file generated successfully</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
