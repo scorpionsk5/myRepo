@@ -8,7 +8,7 @@ namespace RestApiProxy.Models
 {
     public class CustomizedApps : IEnumerable<CustomizedAppsModel>
     {
-        List<CustomizedAppsModel> list;
+        List<CustomizedAppsModel> list = new List<CustomizedAppsModel>();
         public IEnumerator<CustomizedAppsModel> GetEnumerator()
         {
             return list.GetEnumerator();

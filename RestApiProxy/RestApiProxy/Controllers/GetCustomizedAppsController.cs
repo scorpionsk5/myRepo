@@ -14,7 +14,6 @@ namespace RestApiProxy.Controllers
         public IEnumerable<object> Get()
         {
             GetCustomApps CustomApps = new GetCustomApps();
-            CustomApps.BuildCustomApps();
             return CustomApps.GetData();
         }
 
@@ -28,7 +27,6 @@ namespace RestApiProxy.Controllers
         public Object Post([FromBody]object value)
         {
             GetCustomApps CustomApps = new GetCustomApps();
-            CustomApps.BuildCustomApps();
             return CustomApps.GetData();
         }
 
