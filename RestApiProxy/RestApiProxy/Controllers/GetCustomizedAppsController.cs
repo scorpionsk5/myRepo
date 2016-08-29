@@ -20,7 +20,7 @@ namespace RestApiProxy.Controllers
         // GET: api/GetCustomizedApps/5
         public string Get(int id)
         {
-            return "value";
+            throw new NotImplementedException();
         }
 
         // POST: api/GetCustomizedApps
@@ -33,11 +33,13 @@ namespace RestApiProxy.Controllers
         // PUT: api/GetCustomizedApps/5
         public void Put(int id, [FromBody]string value)
         {
+            throw new NotImplementedException();
         }
 
         // DELETE: api/GetCustomizedApps/5
         public void Delete(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }
