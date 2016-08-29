@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using RestApiProxy.Models;
+
+namespace RestApiProxy.Controllers
+{
+    public class GetCustomizedAppsController : ApiController
+    {
+        // GET: api/GetCustomizedApps
+        public IEnumerable<object> Get()
+        {
+            GetCustomApps CustomApps = new GetCustomApps();
+            CustomApps.BuildCustomApps();
+            return CustomApps.GetData();
+        }
+
+        // GET: api/GetCustomizedApps/5
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        // POST: api/GetCustomizedApps
+        public Object Post([FromBody]object value)
+        {
+            GetCustomApps CustomApps = new GetCustomApps();
+            CustomApps.BuildCustomApps();
+            return CustomApps.GetData();
+        }
+
+        // PUT: api/GetCustomizedApps/5
+        public void Put(int id, [FromBody]string value)
+        {
+        }
+
+        // DELETE: api/GetCustomizedApps/5
+        public void Delete(int id)
+        {
+        }
+    }
+}
