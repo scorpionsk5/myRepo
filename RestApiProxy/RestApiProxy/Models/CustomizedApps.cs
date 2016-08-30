@@ -26,7 +26,7 @@ namespace RestApiProxy.Models
             item.CreatedDate = CD;
             item.Description = Des;
             item.IconData = ID;
-            item.PublishedData = PD;
+            item.PublishedDate = PD;
             item.Status = St;
 
             list.Add(item);
