@@ -22,13 +22,13 @@
         View = kendo.Class.extend({
             init: function ($container) {
                 var $mainContainer = utils.createElement('div', { cssClass: 'MainContainer' }),
-                    $caseBuilderContainer = utils.createElement('div', { cssClass: 'CaseBuilderContainer' });
+                    $appContainer = utils.createElement('div', { cssClass: 'AppContainer' });
 
-                $mainContainer.append([utils.createElement('div', { cssClass: 'MainMenu' }), $caseBuilderContainer]);
+                $mainContainer.append([utils.createElement('div', { cssClass: 'MainMenu' }), $appContainer]);
                 $mainContainer.appendTo($container);
 
                 this.$mainContainer = $mainContainer;
-                this.$caseBuilderContainer = $caseBuilderContainer;
+                this.$appContainer = $appContainer;
             },
 
             render: function (appInstance) {
@@ -38,10 +38,6 @@
 
             buildMenu: function () {
                 this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'Home'), utils.constructMenuItem('About', 'About'), utils.constructMenuItem('Help', 'Help')]);
-            },
-
-            addCase: function () {
-
             }
         });
 
