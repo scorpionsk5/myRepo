@@ -70,7 +70,7 @@
     <Content Include="img\background.png" />
     <Content Include="img\black-background.jpeg" />
     <Content Include="js\app\view\templateStore.js" />
-    <Content Include="js\app\view\templates\TestBuilder.html" />
+    <Content Include="js\app\view\templates\TestBuilderMain.html" />
     <Content Include="js\app\view\templates\TestCaseItem.html" />
     <Content Include="js\app\view\testBuilder.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
