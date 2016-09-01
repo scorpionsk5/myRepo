@@ -33,7 +33,7 @@
             var me = this;
             if (!TemplateCache[templateId]) {
                 fetchTemplate({
-                    url: 'templates/' + templateId,
+                    url: 'js/app/view/templates/' + templateId,
                     context: me,
                     success: function (template) {
                         me.registerTemplate(templateId, template);

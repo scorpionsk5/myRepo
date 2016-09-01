@@ -1,4 +1,4 @@
-﻿define(['app/view/testBuilder', 'nicescroll'], function (TestBuilder) {
+﻿define(['lib/testBuilder', 'nicescroll'], function (TestBuilder) {
     var utils = {
         createElement: function (element, properties) {
             var newElement = $('<' + element + '>');
