@@ -4,9 +4,13 @@
     var utils = Object.create();
 
     // Template Store
-    (function () {
+    (function (kendo, $) {  // kendo template functions.
 
-        var TemplateCache = { kendo, $ }, // kendo template functions.
+        var TemplateCache = {
+            testBuilderMainTemplate: '<div class="TestBuilderContainer" data-project-id="#=data.projectId#"><h2 class="Headers">Unit Test Builder</h2><div class="Field"><span class="Key" title="Project Title">Project Title: </span><input class="k-textbox ProjectTitleTextbox" placeholder="Enter Project Title" title="Enter Project Title" type="text" data-bind="value:ViewModel.ProjectTitle" /></div><div class="TestCaseContainer"></div></div>',
+
+            testCaseItemTemplate: ''
+        },
 
             // Method to make ajax call and fetch template.
             fetchTemplate = function (config) {
@@ -78,11 +82,15 @@
         };
 
         utils.buildFunction = buildFunction;
-        
+
     })();
 
     // File Manager module.
-    (function () { })();
+    (function (kendo, $) {
+        var saveFile = function (fileContents, fileName) {
+
+        };
+    })(kendo, jQuery);
 
     var QTestManagementFramework = kendo.Class.extend({
         init: function ($container, options) {
