@@ -1,4 +1,4 @@
-﻿define(['lib/testBuilder', 'nicescroll'], function (TestBuilder) {
+﻿define(['lib/QTestManagementFramework', 'nicescroll'], function (TestBuilder) {
     var utils = {
         createElement: function (element, properties) {
             var newElement = $('<' + element + '>');
