@@ -69,6 +69,11 @@
     <Content Include="css\main.css" />
     <Content Include="img\background.png" />
     <Content Include="img\black-background.jpeg" />
+    <Content Include="js\app\model\dataModels\baseModel.js" />
+    <Content Include="js\app\model\dataModels\callbacks.js" />
+    <Content Include="js\app\model\dataModels\module.js" />
+    <Content Include="js\app\model\dataModels\testCase.js" />
+    <Content Include="js\app\model\Enums.js" />
     <Content Include="js\app\utils.js" />
     <Content Include="js\app\view\templateStore.js" />
     <Content Include="js\app\view\templates\TestBuilderMain.html" />
