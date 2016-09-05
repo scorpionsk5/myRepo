@@ -21,4 +21,6 @@
             { Name: 'afterEach', Description: 'Runs after the each test in the current module.' }
         ]
     });
+
+    return Enums;
 });

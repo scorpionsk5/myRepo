@@ -20,6 +20,7 @@
     },
 
         View = kendo.Class.extend({
+
             init: function ($container) {
                 var $mainContainer = utils.createElement('div', { cssClass: 'MainContainer' }),
                     $appContainer = utils.createElement('div', { cssClass: 'AppContainer' });
@@ -34,10 +35,14 @@
             render: function (appInstance) {
                 this.app = appInstance;
                 this.buildMenu();
+                var testBuilder = new TestBuilder(this.$appContainer, {});
+                //test
+                this.app.appModel.createProject('test project');
+                testBuilder.createProject();
             },
 
             buildMenu: function () {
-                this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'Home'), utils.constructMenuItem('About', 'About'), utils.constructMenuItem('Help', 'Help')]);
+                this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'loadHome'), utils.constructMenuItem('About', 'loadAbout'), utils.constructMenuItem('Help', 'loadHelp')]);
             }
         });
 

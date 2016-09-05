@@ -1,9 +1,9 @@
-﻿define(['app/model/dataModels/baseModel'],function (BaseModel) {
+﻿define(['app/model/dataModels/baseModel'], function (BaseModel) {
     var Module = BaseModel.extend({
-        init: function (name) {
-            BaseModel.fn.init(name);
+        init: function (moduleName) {
+            BaseModel.fn.init(moduleName);
         },
-        Type:'Module'
+        Type: 'Module'
     });
 
     return Module;
