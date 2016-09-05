@@ -18,7 +18,14 @@
 
                 addOrEditTest: kendo.template('')
             },
-            eventHandlers: {}
+            eventHandlers: {
+                ProjectBuilderToolbar: {
+
+                },
+                treeView: {
+
+                }
+            }
         };
 
         return config;
@@ -60,7 +67,7 @@
         },
         closeProject: function () {
             this.treeViewWidget.destroy();
-            this.$container.find('.ProjectEditorContent').empty();
+            this.$container.find('.ProjectEditorContainer').empty();
         },
         refreshTreeViewDataSource: function (data) {
             this.treeViewWidget.setDataSource(new kendo.data.HierarchicalDataSource({ data: data }));

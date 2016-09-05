@@ -1,7 +1,8 @@
 ﻿define(function () {
+    var app;
     var EventHandlers = kendo.Class.extend({
         init: function (appInstance) {
-            this.app = appInstance;
+            app = appInstance;
         },
         menuEvents: {
             loadHome: function (e) {

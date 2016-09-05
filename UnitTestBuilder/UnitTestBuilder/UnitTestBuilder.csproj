@@ -70,6 +70,7 @@
     <Content Include="img\background.png" />
     <Content Include="img\black-background.jpeg" />
     <Content Include="js\app\controller\events.js" />
+    <Content Include="js\app\controller\router.js" />
     <Content Include="js\app\model\dataModels\baseModel.js" />
     <Content Include="js\app\model\dataModels\callbacks.js" />
     <Content Include="js\app\model\dataModels\module.js" />
