@@ -1,21 +1,34 @@
 ﻿define(function () {
-    var eventHandlers = Object.create({
-        loadHome: function (e) {
-            debugger;
+    var EventHandlers = kendo.Class.extend({
+        init: function (appInstance) {
+            this.app = appInstance;
         },
-        loadAbout: function (e) {
-            debugger;
+        menuEvents: {
+            loadHome: function (e) {
+                debugger;
+            },
+            loadAbout: function (e) {
+                debugger;
+            },
+            loadHelp: function (e) {
+                debugger;
+            },
+            loadTestBuilder: function (e) {
+                debugger;
+            },
+            loadTestRunner: function (e) {
+                debugger;
+            }
         },
-        loadHelp: function (e) {
-            debugger;
-        },
-        loadTestBuilder: function (e) {
-            debugger;
-        },
-        loadTestRunner: function (e) {
-            debugger;
+        projectBuilder: {
+            ProjectBuilderToolbar: {
+
+            },
+            treeView: {
+
+            }
         }
     });
 
-    return eventHandlers;
+    return EventHandlers;
 });

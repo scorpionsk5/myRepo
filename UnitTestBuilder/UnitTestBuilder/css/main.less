@@ -5,14 +5,15 @@
 
     .MainContainer {
         height: 100%;
+        background-image: url(../img/background.png);
 
         .MainMenu {
             height: 30px;
             text-align: left;
-            background-color: #ebebeb;
-            background-image: -moz-linear-gradient( 90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
-            background-image: -webkit-linear-gradient( 90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
-            background-image: -ms-linear-gradient( 90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+            background-color: #f6f6f6;
+            background-image: -moz-linear-gradient( 90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+            background-image: -webkit-linear-gradient( 90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
+            background-image: -ms-linear-gradient( 90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%);
 
             .MenuItem {
                 height: 20px;
@@ -22,9 +23,10 @@
                 font-size: initial;
                 cursor: pointer;
                 padding: 4px 10px 0 10px;
+                color: rgb(46, 46, 46);
 
                 &:hover {
-                    color: rgb(245, 252, 244);
+                    color: rgb(98, 98, 98);
                 }
 
                 &.Selected {
@@ -34,9 +36,52 @@
             }
         }
 
-        .CaseBuilderContainer {
+        .AppContainer {
             width: 100%;
-            height: ~"calc(100% - 40px)";
+            height: ~"calc(100% - 50px)";
+
+            .TestBuilderContainer {
+                height: 100%;
+
+                & > .Headers {
+                    text-align: center;
+                    margin: 15px 0 5px 0;
+                    color: white;
+                }
+
+                .ProjectTreeContainer {
+                    float: left;
+                    margin-left: 1%;
+                    width: 25%;
+                    height: ~"calc(100% - 75px)";
+                    display: inline-block;
+                    background-color: rgb(244, 243, 243);
+                    margin-right: 5px;
+                    border-radius: 10px 0 0 10px;
+
+                    .ProjectBuilderToolbar {
+                        height: 35px;
+                    }
+                }
+
+                .ProjectEditorContainer {
+                    width: 73%;
+                    height: ~"calc(100% - 75px)";
+                    display: inline-block;
+                    background-color: rgb(244, 243, 243);
+                    border-radius: 0 10px 10px 0;
+
+                    .ProjectEditorContent {
+                        .Field {
+                            margin: 0 0 10px 40px;
+
+                            .Value {
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -35,14 +35,15 @@
             render: function (appInstance) {
                 this.app = appInstance;
                 this.buildMenu();
-                var testBuilder = new TestBuilder(this.$appContainer, {});
+                var testBuilder = new TestBuilder(this.$appContainer, { eventHandlers: this.app.appController.eventHandlers });
                 //test
                 this.app.appModel.createProject('test project');
-                testBuilder.createProject();
+                testBuilder.createProject(this.app.appModel.viewModel.get('App.Project'));
+                //testBuilder.refreshTreeViewDataSource(this.app.appModel.viewModel.get('App.Project'));
             },
 
             buildMenu: function () {
-                this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'loadHome'), utils.constructMenuItem('About', 'loadAbout'), utils.constructMenuItem('Help', 'loadHelp')]);
+                this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'loadHome'), utils.constructMenuItem('Project', 'loadProjectBuilder'), utils.constructMenuItem('About', 'loadAbout'), utils.constructMenuItem('Help', 'loadHelp')]);
             }
         });
 
