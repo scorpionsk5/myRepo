@@ -18,9 +18,9 @@
         },
 
         routeMenuEvent: function (actionName, e) {
-            if (actionName && eventHandlers.menuEvents[actionName]) {
+            if (actionName && this.eventHandlers.menuEvents[actionName]) {
                 e.preventDefault();
-                eventHandlers.menuEvents[actionName].call(this, e);
+                this.eventHandlers.menuEvents[actionName].call(this, e);
             };
         }
     });
