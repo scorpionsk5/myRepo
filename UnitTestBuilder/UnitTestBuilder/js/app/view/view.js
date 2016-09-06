@@ -33,17 +33,29 @@
             },
 
             render: function (appInstance) {
-                this.app = appInstance;
-                this.buildMenu();
-                var testBuilder = new TestBuilder(this.$appContainer, { eventHandlers: this.app.appController.eventHandlers });
-                //test
-                this.app.appModel.createProject('test project');
-                testBuilder.createProject(this.app.appModel.viewModel.get('App.Project'));
-                //testBuilder.refreshTreeViewDataSource(this.app.appModel.viewModel.get('App.Project'));
+                var me = this;
+                me.app = appInstance;
+                me.buildMenu();
             },
 
             buildMenu: function () {
-                this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'loadHome'), utils.constructMenuItem('Project', 'loadProjectBuilder'), utils.constructMenuItem('About', 'loadAbout'), utils.constructMenuItem('Help', 'loadHelp')]);
+                this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'home'), utils.constructMenuItem('Project', 'projectBuilder'), utils.constructMenuItem('About', 'about'), utils.constructMenuItem('Help', 'help')]);
+            },
+
+            loadTestBuilder: function () {
+                var me = this;
+
+                me.testBuilder = new TestBuilder(this.$appContainer, {
+                    externalEventManager: function (eventName, args, sectionName) {
+                        sectionName = sectionName || 'null';
+                        me.app.appController.routeEvent('testBuilderEvent/:' + sectionName + '/:' + eventName, $.extend(true, args, { app: me.app }));
+                    }
+                });
+            },
+
+            clearContent: function () {
+                this.$appContainer.testBuilder && this.$appContainer.testBuilder.destroy();
+                this.$appContainer.empty();
             }
         });
 

@@ -5,7 +5,8 @@
         kendo: 'lib/kendo.all.min',
         QUnit: 'lib/QUnit',
         underscore: 'lib/underscore-min',
-        nicescroll: 'lib/nicescroll'
+        nicescroll: 'lib/nicescroll',
+        Router:'lib/router'
     },
     shim: {
         'kendo': {

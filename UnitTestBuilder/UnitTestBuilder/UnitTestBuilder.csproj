@@ -70,7 +70,7 @@
     <Content Include="img\background.png" />
     <Content Include="img\black-background.jpeg" />
     <Content Include="js\app\controller\events.js" />
-    <Content Include="js\app\controller\router.js" />
+    <Content Include="js\lib\router.js" />
     <Content Include="js\app\model\dataModels\baseModel.js" />
     <Content Include="js\app\model\dataModels\callbacks.js" />
     <Content Include="js\app\model\dataModels\module.js" />
@@ -82,7 +82,6 @@
     <Content Include="js\app\view\templates\TestBuilderMain.html" />
     <Content Include="js\app\view\templates\TestCaseItem.html" />
     <Content Include="js\app\view\testBuilder.js" />
-    <Content Include="js\lib\QTestManagementFramework.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.js" />
     <Content Include="js\lib\nicescroll.js" />

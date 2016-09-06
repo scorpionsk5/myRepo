@@ -1,31 +1,35 @@
-﻿define(['app/view/templateStore', 'QUnit'], function (templateStore) {
+﻿define(['app/view/templateStore'], function (templateStore) {
     var getDefaultConfig = function () {
         var config = {
             templates: {
-                testBuilderMainTemplate: kendo.template('<div class="TestBuilderContainer"><h3 class="Headers">Unit Test Builder</h3><div class="ProjectTreeContainer"><div class="ProjectBuilderToolbar"></div><div class="ProjectTree" ></div></div><div class="ProjectEditorContainer"></div>'),
+                testBuilderMainTemplate: '<div class="TestBuilderContainer"><h3 class="Headers">Unit Test Builder</h3><div class="ProjectTreeContainer"><div class="ProjectBuilderToolbar"></div><div class="ProjectTree" ></div></div><div class="ProjectEditorContainer"></div>',
 
-                projectBuilderToolbarContentTemplate: kendo.template(''),
+                projectBuilderToolbarContentTemplate: '',
 
-                projectEditorMainContent: kendo.template('<div class="Field"><span class="Key" title="Project Title">Project Title: </span><span class="Value" title="Project Title">#:data.Name#</span></div><div class="ProjectEditorContent" data-project-id="#:data.Id#"></div>'),
+                projectEditorMainContent: '<div class="Field"><span class="Key" title="Project Title">Project Title: </span><span class="Value" title="Project Title">#:data.Name#</span></div><div class="ProjectEditorContent" data-project-id="#:data.Id#"></div>',
 
-                testCaseItemTemplate: kendo.template(''),
+                testCaseItemTemplate: '',
 
-                addOrEditProject: kendo.template(''),
+                addOrEditProject: '',
 
-                addOrEditCallbackFunction: kendo.template(''),
+                addOrEditCallbackFunction: '',
 
-                addOrEditModule: kendo.template(''),
+                addOrEditModule: '',
 
-                addOrEditTest: kendo.template('')
+                addOrEditTest: ''
             },
             eventHandlers: {
-                ProjectBuilderToolbar: {
+                projectBuilderToolbar: {
 
                 },
                 treeView: {
 
+                },
+                editor: {
+
                 }
-            }
+            },
+            externalEventManager: null
         };
 
         return config;
@@ -39,14 +43,15 @@
             me.initEventListeners();
         },
         initEventListeners: function () {
+            var me = this;
             this.$container.find('.ProjectBuilderToolbar').on('click', function (e) {
                 var dataAction = $(e.target).data('action');
-                dataAction && me.routeEvent.call(me, dataAction, e, 'ProjectBuilderToolbar');
+                dataAction && me.routeEvent.call(me, dataAction, { e: e }, 'projectBuilderToolbar');
             });
 
             this.$container.find('.ProjectEditorContent').on('click', function (e) {
                 var dataAction = $(e.target).data('action');
-                dataAction && me.routeEvent.call(me, dataAction, e);
+                dataAction && me.routeEvent.call(me, dataAction, { e: e, widget: me }, 'editor');
             });
         },
         createProject: function (data) {
@@ -72,37 +77,48 @@
         refreshTreeViewDataSource: function (data) {
             this.treeViewWidget.setDataSource(new kendo.data.HierarchicalDataSource({ data: data }));
         },
-        routeEvent: function (eventName, e, objectName) {
+        routeEvent: function (eventName, args, objectName) {
+
+            if (this._config.externalEventManager) {
+                args.e.preventDefault();
+                this._config.externalEventManager.apply(this, arguments);
+                return;
+            }
+
             var eventHandlers = this._config.eventHandlers[objectName] || this._config.eventHandlers;
             if (eventName && eventHandlers[eventName]) {
-                e.preventDefault();
-                eventHandlers[eventName].call(this, e);
+                args.e.preventDefault();
+                eventHandlers[eventName].call(this, args);
             };
         },
         change: function (e) {
-            this.routeEvent('change', e, 'treeView');
+            this.routeEvent('change', { e: e, widget: this }, 'treeView');
         },
         dataBound: function (e) {
-            this.routeEvent('dataBound', e, 'treeView');
+            this.routeEvent('dataBound', { e: e, widget: this }, 'treeView');
         },
         drag: function (e) {
-            this.routeEvent('drag', e, 'treeView');
+            this.routeEvent('drag', { e: e, widget: this }, 'treeView');
         },
         drop: function (e) {
-            this.routeEvent('drop', e, 'treeView');
+            this.routeEvent('drop', { e: e, widget: this }, 'treeView');
         },
         dragstart: function (e) {
-            this.routeEvent('dragStart', e, 'treeView');
+            this.routeEvent('dragStart', { e: e, widget: this }, 'treeView');
         },
         dragend: function (e) {
-            this.routeEvent('dragEnd', e, 'treeView');
+            this.routeEvent('dragEnd', { e: e, widget: this }, 'treeView');
         },
         select: function (e) {
-            this.routeEvent('select', e, 'treeView');
+            this.routeEvent('select', { e: e, widget: this }, 'treeView');
         },
         renderTemplate: function (templateName, data) {
             data = data || {};
-            return this._config.templates[templateName] ? this._config.templates[templateName](data) : '';
+            return this._config.templates[templateName] ? kendo.template(this._config.templates[templateName])(data) : '';
+        },
+        destroy: function () {
+            this.routeEvent('destroy', { e: e, widget: this });
+            this.closeProject();
         }
     });
 

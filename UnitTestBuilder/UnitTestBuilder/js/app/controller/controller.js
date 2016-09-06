@@ -1,28 +1,45 @@
-﻿define(['app/controller/events'], function (EventHandlers) {
+﻿define(['app/controller/events', 'Router'], function (eventHandlers, Router) {
+
+    var routeHandlers = {
+        'loadPage/:pageName': function (pageName, args) {
+            eventHandlers.loadPage && eventHandlers.loadPage[pageName](args);
+        },
+        'testBuilderEvent/:sectionName/:eventName': function (sectionName, eventName, args) {
+            var eventHandlers = sectionName !== 'null' ? eventHandlers.projectBuilder[sectionName] : eventHandlers.projectBuilder;
+
+            eventHandlers[eventName] && eventHandlers[eventName](args);
+        }
+    }
 
     var Controller = kendo.Class.extend({
 
         start: function (appInstance) {
-            this.app = appInstance;
-            this.eventHandlers = new EventHandlers(this.app);
-            this.initRouter();
+            var me = this;
+            me.app = appInstance;
+            me.initRouter();
+
+            me.app.appView.$mainContainer.find('.MainMenu').on('click', function (e) {
+                var dataAction = $(e.target).data('action');
+                dataAction && me.routeEvent('loadPage/:' + dataAction, { e: e, app: me.app });
+            });
         },
 
         initRouter: function () {
             // Event listener for menu items.
-            var me = this;
-            this.app.appView.$mainContainer.find('.MainMenu').on('click', function (e) {
-                var dataAction = $(e.target).data('action');
-                dataAction && me.routeMenuEvent.call(me, dataAction, e);
-            });
+            var me = this,
+                router = new Router();
+
+            router.registerRoute(routeHandlers);
+
+            me.routeEvent = $.proxy(router.route, router);
         },
 
-        routeMenuEvent: function (actionName, e) {
-            if (actionName && this.eventHandlers.menuEvents[actionName]) {
-                e.preventDefault();
-                this.eventHandlers.menuEvents[actionName].call(this, e);
-            };
-        }
+        //routeEvent: function (actionName, e) {
+        //    if (actionName && this.eventHandlers.menuEvents[actionName]) {
+        //        e.preventDefault();
+        //        this.eventHandlers.menuEvents[actionName].call(this, e);
+        //    };
+        //}
     });
 
     return Controller;
