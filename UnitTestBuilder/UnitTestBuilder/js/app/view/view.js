@@ -14,8 +14,8 @@
             return newElement;
         },
 
-        constructMenuItem: function (text, dataAction) {
-            return this.createElement('span', { cssClass: 'MenuItem', text: text, data: { action: dataAction } });
+        constructMenuItem: function (text, dataAction, additionalClass) {
+            return this.createElement('span', { cssClass: 'MenuItem ' + additionalClass || '', text: text, data: { action: dataAction } });
         }
     },
 
@@ -39,7 +39,7 @@
             },
 
             buildMenu: function () {
-                this.$mainContainer.find('.MainMenu').append([utils.constructMenuItem('Home', 'home'), utils.constructMenuItem('Project', 'projectBuilder'), utils.constructMenuItem('About', 'about'), utils.constructMenuItem('Help', 'help')]);
+                this.$mainContainer.find('.MainMenu').append([utils.createElement('span', { cssClass: 'QTB-Logo', data: { action: 'home' } }), utils.constructMenuItem('Home', 'home', 'MoreMargin'), utils.constructMenuItem('Project', 'projectBuilder'), utils.constructMenuItem('About', 'about'), utils.constructMenuItem('Help', 'help')]);
             },
 
             loadTestBuilder: function () {
