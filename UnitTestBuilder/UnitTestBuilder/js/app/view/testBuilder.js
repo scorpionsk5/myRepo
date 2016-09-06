@@ -4,7 +4,7 @@
             templates: {
                 testBuilderMainTemplate: '<div class="TestBuilderContainer"><h3 class="Headers">Unit Test Builder</h3><div class="ProjectTreeContainer"><div class="ProjectBuilderToolbar"></div><div class="ProjectTree" ></div></div><div class="ProjectEditorContainer"></div>',
 
-                projectBuilderToolbarContentTemplate: '',
+                projectBuilderToolbarContentTemplate: '<span class="qbIcon addProject" data-action="addNewProject" title="New Project"></span><span class="qbIcon openProject" data-action="openExistingProject" title="Open Existing Project"></span><span class="qbIcon addModule" data-action="addNewModule" title="Add New Module"></span><span class="qbIcon addTest" data-action="addNewTestCase" title="Add New Test Case"></span><span class="qbIcon deleteItem" data-action="deleteItem" title="Delete Selected Item"></span>',
 
                 projectEditorMainContent: '<div class="Field"><span class="Key" title="Project Title">Project Title: </span><span class="Value" title="Project Title">#:data.Name#</span></div><div class="ProjectEditorContent" data-project-id="#:data.Id#"></div>',
 
@@ -33,13 +33,17 @@
         };
 
         return config;
-    };
+    },
+
+        templateCache = [];
+
     var TestBuilder = kendo.Class.extend({
         init: function ($container, options) {
             var me = this;
             me.$container = $container;
             me._config = $.extend(true, getDefaultConfig(), options);
             me.$container.append(me.renderTemplate('testBuilderMainTemplate'));
+            me.$container.find('.ProjectBuilderToolbar').append(me.renderTemplate('projectBuilderToolbarContentTemplate'));
             me.initEventListeners();
         },
         initEventListeners: function () {
@@ -114,7 +118,16 @@
         },
         renderTemplate: function (templateName, data) {
             data = data || {};
-            return this._config.templates[templateName] ? kendo.template(this._config.templates[templateName])(data) : '';
+            if (!templateCache[templateName]) {
+                if (this._config.templates[templateName]) {
+                    templateCache[templateName] = kendo.template(this._config.templates[templateName]);
+                }
+                else {
+                    return '';
+                };
+            };
+
+            return templateCache[templateName](data);
         },
         destroy: function () {
             this.routeEvent('destroy', { e: e, widget: this });
