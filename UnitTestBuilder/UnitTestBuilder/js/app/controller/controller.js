@@ -1,13 +1,17 @@
-﻿define(['app/controller/events', 'Router'], function (eventHandlers, Router) {
+define(['app/controller/events', 'Router'], function (eventHandlers, Router) {
 
     var routeHandlers = {
         'loadPage/:pageName': function (pageName, args) {
             eventHandlers.loadPage && eventHandlers.loadPage[pageName](args);
         },
         'testBuilderEvent/:sectionName/:eventName': function (sectionName, eventName, args) {
-            var eventHandlers = sectionName !== 'null' ? eventHandlers.projectBuilder[sectionName] : eventHandlers.projectBuilder;
+            var eventHandlerSection = sectionName !== 'null' ? eventHandlers.projectBuilder[sectionName] : eventHandlers.projectBuilder;
 
-            eventHandlers[eventName] && eventHandlers[eventName](args);
+            eventHandlerSection[eventName] && eventHandlerSection[eventName](args);
+        },
+        'bind': function (args) {
+            var app = args.app;
+            kendo.bind(app.appView.$appContainer, app.appModel.viewModel);
         }
     }
 

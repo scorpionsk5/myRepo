@@ -2,7 +2,8 @@
     baseUrl: 'js',
     paths: {
         jquery: 'lib/jquery-2.2.2.min',
-        kendo: 'lib/kendo.all.min',
+        //kendo: 'lib/kendo.all.min',
+        kendo: 'lib/kendo',
         QUnit: 'lib/QUnit',
         underscore: 'lib/underscore-min',
         nicescroll: 'lib/nicescroll',

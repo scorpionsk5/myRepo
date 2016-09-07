@@ -1,8 +1,10 @@
-﻿<div class="TestBuilderContainer" data-project-id="#=data.projectId#">
-    <h2 class="Headers">Unit Test Builder</h2>
-    <div class="Field">
-        <span class="Key" title="Project Title">Project Title: </span>
-        <input class="k-textbox ProjectTitleTextbox" placeholder="Enter Project Title" title="Enter Project Title" type="text" data-bind="value:ViewModel.ProjectTitle" />
+﻿<div class="TestBuilderContainer">
+    <h3 class="Headers">Unit Test Builder</h3>
+    <div class="ProjectTreeContainer">
+        <div class="ProjectBuilderToolbar"></div>
+        <div class="ProjectTree" data-bind="source:App.Project"></div>
     </div>
-    <div class="TestCaseContainer"></div>
+    <div class="ProjectEditorContainer">
+        <div class="ProjectEditorContent"></div>
+    </div>
 </div>

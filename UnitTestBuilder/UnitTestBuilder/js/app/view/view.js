@@ -45,16 +45,18 @@
             loadTestBuilder: function () {
                 var me = this;
 
-                me.testBuilder = new TestBuilder(this.$appContainer, {
+                me.app.testBuilder = new TestBuilder(this.$appContainer, {
                     externalEventManager: function (eventName, args, sectionName) {
                         sectionName = sectionName || 'null';
                         me.app.appController.routeEvent('testBuilderEvent/:' + sectionName + '/:' + eventName, $.extend(true, args, { app: me.app }));
+
+                        (eventName !== 'dataBound') && me.app.appController.routeEvent('bind', { app: me.app });
                     }
                 });
             },
 
             clearContent: function () {
-                this.$appContainer.testBuilder && this.$appContainer.testBuilder.destroy();
+                this.app.testBuilder && this.app.testBuilder.destroy();
                 this.$appContainer.empty();
             }
         });

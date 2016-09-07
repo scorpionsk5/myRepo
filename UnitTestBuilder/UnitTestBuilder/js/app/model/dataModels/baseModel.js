@@ -6,9 +6,9 @@
         },
         Name: '',
         Id: '',
-        Contents: [],
-        addContent: function (item) {
-            this.Contents.push(item);
+        items: [],
+        addItem: function (item) {
+            this.items.push(item);
         },
         toString: function () { }
     });

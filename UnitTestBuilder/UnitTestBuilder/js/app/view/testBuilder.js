@@ -2,11 +2,11 @@
     var getDefaultConfig = function () {
         var config = {
             templates: {
-                testBuilderMainTemplate: '<div class="TestBuilderContainer"><h3 class="Headers">Unit Test Builder</h3><div class="ProjectTreeContainer"><div class="ProjectBuilderToolbar"></div><div class="ProjectTree" ></div></div><div class="ProjectEditorContainer"></div>',
+                testBuilderMainTemplate: '<div class="TestBuilderContainer"><h3 class="Headers">Unit Test Builder</h3><div class="ProjectTreeContainer"><div class="ProjectBuilderToolbar"></div><div class="ProjectTree" data-bind="source:App.Project"></div></div><div class="ProjectEditorContainer"><div class="ProjectEditorContent"></div></div></div>',
 
                 projectBuilderToolbarContentTemplate: '<span class="qbIcon addProject" data-action="addNewProject" title="New Project"></span><span class="qbIcon openProject" data-action="openExistingProject" title="Open Existing Project"></span><span class="qbIcon addModule" data-action="addNewModule" title="Add New Module"></span><span class="qbIcon addTest" data-action="addNewTestCase" title="Add New Test Case"></span><span class="qbIcon deleteItem" data-action="deleteItem" title="Delete Selected Item"></span>',
 
-                projectEditorMainContent: '<div class="Field"><span class="Key" title="Project Title">Project Title: </span><span class="Value" title="Project Title">#:data.Name#</span></div><div class="ProjectEditorContent" data-project-id="#:data.Id#"></div>',
+                projectEditorMainContent: '<h3 class="Headers"><span class="Key" title="Project Title">Project Title: </span><span class="Value" title="Project Title" data-bind="text:App.Project[0].Name"></span></div><div class="ProjectEditorContent"></h3>',
 
                 testCaseItemTemplate: '',
 
@@ -44,6 +44,19 @@
             me._config = $.extend(true, getDefaultConfig(), options);
             me.$container.append(me.renderTemplate('testBuilderMainTemplate'));
             me.$container.find('.ProjectBuilderToolbar').append(me.renderTemplate('projectBuilderToolbarContentTemplate'));
+
+            me.treeViewWidget = me.$container.find('.ProjectTree').kendoTreeView({
+                dataTextField: 'Name',
+                data: [],
+                change: $.proxy(me.change, me),
+                dataBound: $.proxy(me.dataBound, me),
+                drag: $.proxy(me.drag, me),
+                drop: $.proxy(me.drop, me),
+                dragstart: $.proxy(me.dragstart, me),
+                dragend: $.proxy(me.dragend, me),
+                select: $.proxy(me.select, me)
+            }).getKendoTreeView();
+
             me.initEventListeners();
         },
         initEventListeners: function () {
@@ -58,21 +71,9 @@
                 dataAction && me.routeEvent.call(me, dataAction, { e: e, widget: me }, 'editor');
             });
         },
-        createProject: function (data) {
+        createProject: function () {
             var me = this;
-            me.treeViewWidget = me.$container.find('.ProjectTree').kendoTreeView({
-                dataTextField: 'Name',
-                dataSource: data,
-                change: $.proxy(me.change, me),
-                dataBound: $.proxy(me.dataBound, me),
-                drag: $.proxy(me.drag, me),
-                drop: $.proxy(me.drop, me),
-                dragstart: $.proxy(me.dragstart, me),
-                dragend: $.proxy(me.dragend, me),
-                select: $.proxy(me.select, me)
-            }).getKendoTreeView();
-
-            me.$container.find('.ProjectEditorContainer').append(me.renderTemplate('projectEditorMainContent', data[0]));
+            me.$container.find('.ProjectEditorContainer').append(me.renderTemplate('projectEditorMainContent'));
         },
         closeProject: function () {
             this.treeViewWidget.destroy();

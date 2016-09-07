@@ -20,8 +20,8 @@
             projectBuilderToolbar: {
                 addNewProject: function (args) {
                     var app = args.app;
-                    app.appView.testBuilder.createProject(app.appModel.viewModel.get('App.Project'));
                     app.appModel.createProject('test project');
+                    app.testBuilder.createProject(app.appModel.viewModel.get('App.Project'));
                 }
             },
             treeView: {

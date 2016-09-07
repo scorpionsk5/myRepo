@@ -5,14 +5,17 @@
             this.viewModel = kendo.observable({
                 App: {
                     Project: [],
-                    Enums: Enums
+                    Enums: Enums,
+                    Editor: {
+                        SelectedItemUid: '',
+                        EditorData: {}
+                    }
                 }
             });
         },
 
         load: function (appInstance) {
             this.app = appInstance;
-            kendo.bind(this.app.appView.$appContainer, this.viewModel);
         },
 
         createProject: function (ProjectName) {
