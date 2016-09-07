@@ -24,7 +24,7 @@
                     app.testBuilder.createProject(app.appModel.viewModel.get('App.Project'));
                 }
             },
-            treeView: {
+            projectTree: {
 
             },
             editor: {

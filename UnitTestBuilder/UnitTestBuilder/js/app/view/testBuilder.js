@@ -6,7 +6,7 @@
 
                 projectBuilderToolbarContentTemplate: '<span class="qbIcon addProject" data-action="addNewProject" title="New Project"></span><span class="qbIcon openProject" data-action="openExistingProject" title="Open Existing Project"></span><span class="qbIcon addModule" data-action="addNewModule" title="Add New Module"></span><span class="qbIcon addTest" data-action="addNewTestCase" title="Add New Test Case"></span><span class="qbIcon deleteItem" data-action="deleteItem" title="Delete Selected Item"></span>',
 
-                projectEditorMainContent: '<h3 class="Headers"><span class="Key" title="Project Title">Project Title: </span><span class="Value" title="Project Title" data-bind="text:App.Project[0].Name"></span></div><div class="ProjectEditorContent"></h3>',
+                projectEditorMainContent: '<h3 class="Headers"><span class="Key" title="Project Title">Project Title: </span><span class="Value" title="Project Title" data-bind="text:App.Project[0].Name"></span></h3><div class="ProjectEditorContent"></div>',
 
                 testCaseItemTemplate: '',
 
@@ -71,6 +71,9 @@
                 dataAction && me.routeEvent(dataAction, { e: e, widget: me }, 'editor');
             });
         },
+        addNewProject: function () {
+            me.$container.find('.ProjectEditorContent').append(me.renderTemplate(''));
+        },
         createProject: function () {
             var me = this;
             me.$container.find('.ProjectEditorContainer').append(me.renderTemplate('projectEditorMainContent'));
@@ -97,7 +100,7 @@
             };
         },
         change: function (e) {
-            this.routeEvent('change', { e: e, widget: this }, 'treeView');
+            this.routeEvent('change', { e: e, widget: this }, 'projectTree');
         },
         dataBound: function (e) {
             this.routeEvent('dataBound', { e: e, widget: this }, 'treeView');
