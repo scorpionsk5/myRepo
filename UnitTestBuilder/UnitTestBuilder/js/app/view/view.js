@@ -54,6 +54,7 @@
                 //    }
                 //});
 
+                //TODO: add preloads for templates.
                 me.$appContainer.append(me.renderTemplate('testBuilderMainTemplate'));
                 me.$appContainer.find('.ProjectBuilderToolbar').append(me.renderTemplate('projectBuilderToolbarContentTemplate'));
 
