@@ -63,12 +63,12 @@
             var me = this;
             this.$container.find('.ProjectBuilderToolbar').on('click', function (e) {
                 var dataAction = $(e.target).data('action');
-                dataAction && me.routeEvent.call(me, dataAction, { e: e }, 'projectBuilderToolbar');
+                dataAction && me[dataAction] && me[dataAction](e);
             });
 
             this.$container.find('.ProjectEditorContent').on('click', function (e) {
                 var dataAction = $(e.target).data('action');
-                dataAction && me.routeEvent.call(me, dataAction, { e: e, widget: me }, 'editor');
+                dataAction && me.routeEvent(dataAction, { e: e, widget: me }, 'editor');
             });
         },
         createProject: function () {
