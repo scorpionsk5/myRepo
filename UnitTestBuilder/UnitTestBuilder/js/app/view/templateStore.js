@@ -1,4 +1,4 @@
-﻿define(function () {
+define(function () {
 
     var TemplateCache = {}, // kendo template functions
 
@@ -33,7 +33,7 @@
             var me = this;
             if (!TemplateCache[templateId]) {
                 fetchTemplate({
-                    url: 'js/app/view/templates/' + templateId,
+                    url: 'js/app/view/templates/' + templateId + '.html',
                     context: me,
                     success: function (template) {
                         me.registerTemplate(templateId, template);
@@ -46,6 +46,7 @@
 
         // Method to render template by executing compiled template with data as argument
         renderTemplate: function (templateId, data) {
+            data = data || {};
             return this.getTemplate(templateId)(data);
         }
 

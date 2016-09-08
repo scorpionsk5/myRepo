@@ -14,21 +14,30 @@
                 var app = args.app;
                 app.appView.clearContent();
                 app.appView.loadTestBuilder();
+                app.appController.routeEvent('bind', { app: app });
             }
         },
         projectBuilder: {
             projectBuilderToolbar: {
                 addNewProject: function (args) {
                     var app = args.app;
-                    app.appModel.createProject('test project');
-                    app.testBuilder.createProject(app.appModel.viewModel.get('App.Project'));
+                    app.appView.loadWindow('<div class="addNewProjectForm" title="Enter Project Name"><span class="Key">Project Name: </span><input type="text" class="ProjectNameInput" placeholder="Enter Project Name"/><input type="button" value="Create Project" class="k-textBox CreateProject" data-action="createProject" /></div>', 'Add New Project');
                 }
             },
             projectTree: {
+                select: function (e) {
 
+                }
             },
             editor: {
 
+            }
+        },
+        windowEvents: {
+            createProject: function (args) {
+                var app = args.app, projectName = args.widget.element.find('.ProjectNameInput').val();
+                app.appModel.createProject(projectName || 'Untitled');
+                args.widget.close();
             }
         }
     });

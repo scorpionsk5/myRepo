@@ -86,7 +86,6 @@
     <Content Include="js\app\view\templateStore.js" />
     <Content Include="js\app\view\templates\testBuilderMainTemplate.html" />
     <Content Include="js\app\view\templates\TestCaseItem.html" />
-    <Content Include="js\app\view\testBuilder.js" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.js" />
     <Content Include="js\lib\nicescroll.js" />
