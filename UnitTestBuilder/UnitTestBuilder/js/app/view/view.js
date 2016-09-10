@@ -55,7 +55,7 @@
                 me.$appContainer.find('.ProjectBuilderToolbar').append(templateStore.renderTemplate('projectBuilderToolbarContentTemplate'));
 
                 me.treeViewWidget = me.$appContainer.find('.ProjectTree').kendoTreeView({
-                    dataTextField: 'Name',
+                    template: '<div class="TreeItem #:item.Type#"><span class="TreeSprite #:item.Type#"></span>#:item.Name#</div>',
                     change: $.proxy(me._routeTreeWidgetEvent, me, 'change'),
                     dataBound: $.proxy(me._routeTreeWidgetEvent, me, 'dataBound'),
                     drag: $.proxy(me._routeTreeWidgetEvent, me, 'drag'),
@@ -84,14 +84,12 @@
 
             _routeTreeWidgetEvent: function (eventName, e) {
                 var me = this;
-                me.routeEvent('testBuilderEvent/:projectTree/:' + eventName, { e: e, app: me.app });
+                me.routeEvent(eventName, { e: e }, 'testBuilderEvent/:projectTree');
             },
 
             routeEvent: function (eventName, args, sectionName) {
                 var me = this;
-                me.app.appController.routeEvent(sectionName + '/:' + eventName, $.extend(true, args, { app: me.app }));
-
-                //(eventName !== 'dataBound') && me.app.appController.routeEvent('bind', { app: me.app });    //TODO: change to rebind on editor.
+                me.app.appController.routeEvent(sectionName + '/:' + eventName, $.extend(true, args, { app: me.app, treeViewWidget: me.treeViewWidget }));
             },
 
             clearContent: function () {

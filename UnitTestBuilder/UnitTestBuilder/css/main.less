@@ -74,7 +74,41 @@
 
                     .ProjectBuilderToolbar {
                         height: 35px;
-                        padding: 5px 5px 0 5px;
+                        padding: 5px 5px 0 10px;
+                    }
+
+                    .ProjectTree {
+                        .TreeSprite {
+                            height: 16px;
+                            width: 16px;
+                            display: inline-block;
+
+                            &.Project {
+                            }
+
+                            &.Module {
+                            }
+
+                            &.TestCase {
+                            }
+
+                            &.Callback {
+                            }
+                        }
+
+                        .TreeItem {
+                            &.Project {
+                            }
+
+                            &.Module {
+                            }
+
+                            &.TestCase {
+                            }
+
+                            &.Callback {
+                            }
+                        }
                     }
                 }
 
@@ -85,13 +119,38 @@
                     background-color: rgb(244, 243, 243);
                     border-radius: 0 10px 10px 0;
 
-                    .ProjectEditorContent {
-                        .Field {
-                            margin: 0 0 10px 40px;
+                    .Headers {
+                        padding-left: 20px;
 
-                            .Value {
-                                margin-left: 10px;
+                        .Value {
+                            margin-left: 15px;
+                        }
+                    }
+
+                    .ProjectEditorContent {
+                        .Headers {
+                            .Field {
+                                margin: 0 0 10px 40px;
+
+                                .Value {
+                                    margin-left: 10px;
+                                }
                             }
+                        }
+
+                        .EditorTable {
+                            margin-left: 50px;
+
+                            tr {
+                                td {
+                                    padding: 8px;
+                                }
+                            }
+                        }
+
+                        .Buttons {
+                            padding-left: 300px;
+                            margin-top: 20px;
                         }
                     }
                 }
@@ -99,7 +158,7 @@
         }
 
         .qbIcon {
-            margin-left: 5px;
+            margin-left: 10px;
             display: inline-block;
             height: 30px;
             width: 30px;
@@ -123,6 +182,16 @@
 
             &.deleteItem {
                 background-position: 362px 282px;
+            }
+        }
+    }
+
+    .k-window {
+        .WindowWidget {
+            .addNewProjectForm {
+                .CreateProject {
+                    margin: 10px;
+                }
             }
         }
     }

@@ -1,14 +1,8 @@
-﻿define(['app/model/dataModels/baseModel', 'app/model/Enums'], function (BaseModel, Enums) {
+﻿define(['app/model/dataModels/baseModel'], function (BaseModel) {
     var Callback = BaseModel.extend({
-        init: function (name, callbackName, hierarchy) {
-            var isCallbackValid = _.findWhere(Enums[hierarchy], { Name: callbackName }) ? true : false;
-            if (isCallbackValid) {
-                this.CallbackName = callbackName;
-                BaseModel.fn.init(name);
-            }
-            else {
-                throw 'Invalid Callback Name!!!';
-            };
+        init: function (name, callbackName) {
+            this.CallbackName = callbackName;
+            BaseModel.fn.init(name);
         },
         Type: 'Callback',
         CallbackName: '',

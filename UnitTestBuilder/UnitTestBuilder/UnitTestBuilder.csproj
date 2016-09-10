@@ -73,7 +73,6 @@
     <Content Include="img\QTB_Sprits.png" />
     <Content Include="js\app\controller\events.js" />
     <Content Include="js\app\view\templates\projectBuilderToolbarContentTemplate.html" />
-    <Content Include="js\app\view\templates\projectEditorMainContent.html" />
     <Content Include="js\lib\kendo.js" />
     <Content Include="js\lib\router.js" />
     <Content Include="js\app\model\dataModels\baseModel.js" />
@@ -85,7 +84,6 @@
     <Content Include="js\app\utils.js" />
     <Content Include="js\app\view\templateStore.js" />
     <Content Include="js\app\view\templates\testBuilderMainTemplate.html" />
-    <Content Include="js\app\view\templates\TestCaseItem.html" />
     <Content Include="js\lib\jquery-2.2.2.min.js" />
     <Content Include="js\lib\kendo.all.min.js" />
     <Content Include="js\lib\nicescroll.js" />

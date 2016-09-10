@@ -1,5 +1,11 @@
 ﻿define(['app/utils', 'app/model/dataModels/testCase', 'app/model/dataModels/module', 'app/model/dataModels/callbacks', 'app/model/Enums', 'app/model/dataModels/project'], function (utils, TestCase, Module, Callback, Enums, Project) {
 
+    var EnumModel = {
+        Module: '_createModule',
+        TestCase: '_createTestCase',
+        Callback: '_createCallback'
+    };
+
     var Model = kendo.Class.extend({
         init: function () {
             this.viewModel = kendo.observable({
@@ -7,9 +13,10 @@
                     Project: [],
                     Enums: Enums,
                     Editor: {
-                        SelectedItemUid: '',
+                        EditMode: '',
                         EditorData: {}
-                    }
+                    },
+                    SelectedItem:{}
                 }
             });
         },
@@ -19,26 +26,31 @@
         },
 
         createProject: function (ProjectName) {
-            this.viewModel.App.Project.push(new Project(ProjectName));
+            this.viewModel.App.set('Project', [new Project(ProjectName)]);
         },
 
         loadExisitingProject: function (projectData) {
             this.viewModel.App.set('Project', projectData);
         },
 
-        createModule: function (moduleName) {
+        createItem: function (type, arg1, arg2) {
+            try {
+                return this[EnumModel[type]](arg1, arg2);
+            } catch (e) {
+                console.error(e);
+                return [];
+            }
+        },
+
+        _createModule: function (moduleName) {
             return new Module(moduleName);
         },
 
-        createModuleLevelCallback: function (name, callbackName) {
-            return new Callback(name, callbackName, 'ModuleLevelCallback');
+        _createCallback: function (name, callbackName) {
+            return new Callback(name, callbackName);
         },
 
-        createProjectLevelCallback: function (name, callbackName) {
-            return new Callback(name, callbackName, 'ProjectLevelCallback');
-        },
-
-        createTestCase: function (testName, type) {
+        _createTestCase: function (testName, type) {
             return new TestCase(testName, type);
         }
     });

@@ -1,16 +1,10 @@
-﻿define(['app/model/dataModels/baseModel', 'app/model/Enums'], function (BaseModel, Enums) {
+﻿define(['app/model/dataModels/baseModel'], function (BaseModel) {
     var TestCase = BaseModel.extend({
-        init: function (name, type) {
-            var isTypeValid = _.findWhere(Enums.TestCaseType, { Name: type }) ? true : false;
-            if (isTypeValid) {
-                this.Type = type;
-                BaseModel.fn.init(name);
-            }
-            else {
-                throw 'Invalid Type!!!';
-            };
+        init: function (name) {
+            BaseModel.fn.init(name);
         },
-        Type: ''    // [test, only, skip]
+        Type: 'TestCase',
+        SubType: ''
     });
 
     return TestCase;
