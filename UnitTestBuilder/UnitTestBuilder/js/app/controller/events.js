@@ -36,6 +36,9 @@ define(function () {
                         vm = app.appModel.viewModel.get('App.Editor');
                     vm.set('EditMode', false);
                     vm.set('EditorData', app.appModel.createItem('TestCase'));
+                },
+                addNewCallback: function (args) {
+
                 }
             },
             projectTree: {

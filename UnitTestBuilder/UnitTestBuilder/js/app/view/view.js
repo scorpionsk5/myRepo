@@ -114,7 +114,7 @@
                 windowWidget.open().center();
                 $windowWidget.on('click', function (e) {
                     var dataAction = $(e.target).data('action');
-                    dataAction && me.routeEvent(dataAction, { e: e, widget: windowWidget }, 'windowEvents');
+                    dataAction && me.routeEvent(dataAction, { e: e, widget: windowWidget, forceRepeat: true }, 'windowEvents');
                 });
             }
         });
