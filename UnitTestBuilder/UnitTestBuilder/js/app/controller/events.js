@@ -20,8 +20,8 @@ define(function () {
         projectBuilder: {
             projectBuilderToolbar: {
                 addNewProject: function (args) {
-                    var app = args.app;
-                    app.appView.loadWindow('<div class="addNewProjectForm" title="Enter Project Name"><span class="Key">Project Name: </span><input type="text" class="ProjectNameInput k-textbox" placeholder="Enter Project Name"/><input type="button" value="Create Project" class="k-button CreateProject" data-action="createProject" /></div>', 'Add New Project');
+                    var app = args.app,
+                    windowWidget = app.appView.loadWindow('<div class="addNewProjectForm" title="Enter Project Name"><span class="Key">Project Name: </span><input type="text" class="ProjectNameInput k-textbox" placeholder="Enter Project Name"/><input type="button" value="Create Project" class="k-button CreateProject" data-action="createProject" /></div>', 'Add New Project');
                 },
                 addNewModule: function (args) {
                     var app = args.app,
@@ -31,21 +31,31 @@ define(function () {
                 },
                 addNewTestCase: function (args) {
                     var app = args.app,
-                        treeWidget = app.appView.treeViewWidget,
-                        selectedDataItem = treeWidget.dataItem(treeWidget.select()),
                         vm = app.appModel.viewModel.get('App.Editor');
                     vm.set('EditMode', false);
                     vm.set('EditorData', app.appModel.createItem('TestCase'));
                 },
                 addNewCallback: function (args) {
+                    var app = args.app,
+                        treeWidget = app.appView.treeViewWidget,
+                        selectedDataItem = treeWidget.dataItem(treeWidget.select()),
+                        vm = app.appModel.viewModel.get('App.Editor'),
+                        subType = 'ModuleLevelCallback';
 
+                    if (selectedDataItem.Type === 'Project') {
+                        subType = 'ProjectLevelCallback';
+                    }
+                    vm.set('EditMode', false);
+                    vm.set('EditorData', app.appModel.createItem('Callback', '', subType));
                 }
             },
             projectTree: {
-                select: function (args) {
+                change: function (args) {
                     var app = args.app,
-                        selectedItemData = args.e.sender.dataItem(args.e.node),
+                        treeWidget = args.e.sender,
+                        selectedItemData = treeWidget.dataItem(treeWidget.select()),
                         vm = app.appModel.viewModel.get('App');
+
                     vm.set('Editor.EditMode', true);
                     vm.set('Editor.EditorData', selectedItemData);
                     vm.set('SelectedItem', selectedItemData);
@@ -55,10 +65,9 @@ define(function () {
                 add: function (args) {
                     var app = args.app,
                         treeWidget = app.appView.treeViewWidget,
-                        selectedDataItem = treeWidget.dataItem(treeWidget.select()),
                         vm = app.appModel.viewModel.get('App.Editor');
 
-                    selectedDataItem.items.push(vm.get('EditorData'));
+                    treeWidget.select(treeWidget.append(vm.get('EditorData'), treeWidget.select()));
                 },
                 update: function (args) {
                     var app = args.app,
@@ -67,6 +76,7 @@ define(function () {
                         vm = app.appModel.viewModel.get('App.Editor');
 
                     selectedDataItem = vm.get('EditorData');
+                    app.appController.routeEvent('bind', { app: app });
                 }
             }
         },

@@ -103,19 +103,25 @@
                     content: {
                         template: content
                     },
-                    close: function () {
+                    close: function (e) {
                         $windowWidget.off('click');
+                        me.routeEvent('close', { e: e }, 'windowEvents');
                         this.destroy();
                     },
-                    model: true
+                    modal: true,
+                    activate: function (e) {
+                        this.element.find('input[type=text]').eq(0).focus();
+                    }
                 }, config || {});
 
                 windowWidget = $windowWidget.kendoWindow(config).getKendoWindow();
                 windowWidget.open().center();
                 $windowWidget.on('click', function (e) {
                     var dataAction = $(e.target).data('action');
-                    dataAction && me.routeEvent(dataAction, { e: e, widget: windowWidget, forceRepeat: true }, 'windowEvents');
+                    dataAction && me.routeEvent(dataAction, { e: e, widget: windowWidget }, 'windowEvents');
                 });
+
+                return windowWidget;
             }
         });
 

@@ -44,6 +44,28 @@
                     </td>
                 </tr>
                 <!-- Sub type for test case end -->
+
+                <!-- Sub type for module level callback -->
+                <tr data-bind="visible:App.Editor.EditorData.SubType)===('ModuleLevelCallback'">
+                    <td>
+                        <span>Callback Type:</span>
+                    </td>
+                    <td>
+                        <span data-bind="source:App.Enums.ModuleLevelCallback, value:App.Editor.EditorData.CallbackName" data-role="dropdownlist" data-text-field="DisplayName" data-value-field="Name"></span>
+                    </td>
+                </tr>
+                <!-- Sub type for module level callback end -->
+
+                <!-- Sub type for project level callback -->
+                <tr data-bind="visible:App.Editor.EditorData.SubType)===('ProjectLevelCallback'">
+                    <td>
+                        <span>Callback Type:</span>
+                    </td>
+                    <td>
+                        <span data-bind="source:App.Enums.ProjectLevelCallback, value:App.Editor.EditorData.CallbackName" data-role="dropdownlist" data-text-field="DisplayName" data-value-field="Name"></span>
+                    </td>
+                </tr>
+                <!-- Sub type for project level callback end -->
             </table>
 
             <div class="Buttons">

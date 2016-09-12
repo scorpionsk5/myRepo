@@ -46,8 +46,8 @@
             return new Module(moduleName);
         },
 
-        _createCallback: function (name, callbackName) {
-            return new Callback(name, callbackName);
+        _createCallback: function (name, subType) {
+            return new Callback(name, subType);
         },
 
         _createTestCase: function (testName, type) {
