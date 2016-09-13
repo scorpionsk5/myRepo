@@ -1,8 +1,17 @@
-﻿<span class="qbIcon addProject" data-action="addNewProject" title="New Project" data-bind="invisible:App.Project.length"></span>
-<span class="qbIcon openProject" data-action="openExistingProject" title="Open Existing Project"></span>
-<span class="qbIcon addModule" data-action="addNewModule" title="Add New Module" data-bind="visible:App.SelectedItem.Id))))&&(((((d.App.SelectedItem.Type)!==('TestCase')"></span>
-<span class="qbIcon addTest" data-action="addNewTestCase" title="Add New Test Case" data-bind="visible:App.SelectedItem.Type)===('Module'"></span>
-<span class="qbIcon addCallback" data-action="addNewCallback" title="Add New Callback" data-bind="visible:App.SelectedItem.Id))))&&(((((d.App.SelectedItem.Type)!==('TestCase')"></span>
-<span class="qbIcon deleteItem" data-action="deleteItem" title="Delete Selected Item" data-bind="visible:App.SelectedItem.Id))))&&(((((d.App.SelectedItem.Type)!==('Project')"></span>
+﻿<!-- Add new project button -->
+<span class="qbIcon addProject" data-action="addNewProject" title="New Project" data-bind="invisible:App.Project.length"></span>
 
-<!-- TODO: hide add callback button on select of callback item  -->
+<!-- Open project button -->
+<span class="qbIcon openProject" data-action="openExistingProject" title="Open Existing Project"></span>
+
+<!-- Add new module button -->
+<span class="qbIcon addModule" data-action="addNewModule" title="Add New Module" data-bind="visible:App.SelectedItem.Id))))))&&(((((d.App.SelectedItem.Type)===('Project')||((((d.App.SelectedItem.Type)===('Module'))"></span>
+
+<!-- Add new test case -->
+<span class="qbIcon addTest" data-action="addNewTestCase" title="Add New Test Case" data-bind="visible:App.SelectedItem.Type)===('Module'"></span>
+
+<!-- Add new call back button -->
+<span class="qbIcon addCallback" data-action="addNewCallback" title="Add New Callback" data-bind="visible:App.SelectedItem.Id))))))&&(((((d.App.SelectedItem.Type)===('Project')||((((d.App.SelectedItem.Type)===('Module'))"></span>
+
+<!-- Delete item button -->
+<span class="qbIcon deleteItem" data-action="deleteItem" title="Delete Selected Item" data-bind="visible:App.SelectedItem.Id))))&&(((((d.App.SelectedItem.Type)!==('Project')"></span>

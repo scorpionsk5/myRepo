@@ -1,4 +1,4 @@
-define(function () {
+define(['app/utils'],function (utils) {
     var EventHandlers = Object.create({
         loadPage: {
             home: function (args) {
@@ -47,6 +47,23 @@ define(function () {
                     }
                     vm.set('EditMode', false);
                     vm.set('EditorData', app.appModel.createItem('Callback', '', subType));
+                },
+                deleteItem: function (args) {
+                    var app = args.app,
+                        treeWidget = app.appView.treeViewWidget,
+                        $selectedItem = treeWidget.select(),
+                        selectedItem = treeWidget.dataItem($selectedItem),
+                        parentItem = treeWidget.dataItem(treeWidget.parent($selectedItem));
+
+                    //treeWidget.remove(treeWidget.select());
+
+                    $.each(parentItem.items, function (index, item) {
+                        if (item.Id === selectedItem.Id) {
+                            parentItem.items.splice(index, 1);
+                            app.appModel.viewModel.set('App.Editor.EditorData', {});
+                            return false;
+                        }
+                    });
                 }
             },
             projectTree: {

@@ -44,7 +44,7 @@
             elem.click();
             elem.remove();
         },
-        
+
         // Method to read content of file using FileReader class.
         getFileContents: function (rawFile) {
             var def = $.Deferred(),
@@ -63,4 +63,6 @@
             return def.promise();
         }
     });
+
+    return utils;
 });

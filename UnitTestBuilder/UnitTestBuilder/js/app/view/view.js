@@ -55,7 +55,7 @@
                 me.$appContainer.find('.ProjectBuilderToolbar').append(templateStore.renderTemplate('projectBuilderToolbarContentTemplate'));
 
                 me.treeViewWidget = me.$appContainer.find('.ProjectTree').kendoTreeView({
-                    template: '<div class="TreeItem #:item.Type#"><span class="TreeSprite #:item.Type#"></span>#:item.Name#</div>',
+                    template: '<span class="TreeItem #:item.Type#"><span class="TreeSprite #:item.Type#"></span>#:item.Name#</span>',
                     change: $.proxy(me._routeTreeWidgetEvent, me, 'change'),
                     dataBound: $.proxy(me._routeTreeWidgetEvent, me, 'dataBound'),
                     drag: $.proxy(me._routeTreeWidgetEvent, me, 'drag'),
@@ -73,18 +73,19 @@
 
                 me.$appContainer.find('.ProjectBuilderToolbar').on('click', function (e) {
                     var dataAction = $(e.target).data('action');
-                    dataAction && me.routeEvent(dataAction, { e: e }, 'testBuilderEvent/:projectBuilderToolbar');
+                    dataAction && me.routeEvent(dataAction, { e: e, forceRepeat: true }, 'testBuilderEvent/:projectBuilderToolbar');
+                    me.$appContainer.find('.ProjectEditorContent input[type=text]').eq(0).focus();
                 });
 
                 me.$appContainer.find('.ProjectEditorContent').on('click', function (e) {
                     var dataAction = $(e.target).data('action');
-                    dataAction && me.routeEvent(dataAction, { e: e }, 'testBuilderEvent/:editor');
+                    dataAction && me.routeEvent(dataAction, { e: e, forceRepeat: true }, 'testBuilderEvent/:editor');
                 });
             },
 
             _routeTreeWidgetEvent: function (eventName, e) {
                 var me = this;
-                me.routeEvent(eventName, { e: e }, 'testBuilderEvent/:projectTree');
+                me.routeEvent(eventName, { e: e, forceRepeat: true }, 'testBuilderEvent/:projectTree');
             },
 
             routeEvent: function (eventName, args, sectionName) {
