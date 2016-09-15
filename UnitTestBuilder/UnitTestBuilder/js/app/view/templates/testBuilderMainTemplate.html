@@ -66,6 +66,17 @@
                     </td>
                 </tr>
                 <!-- Sub type for project level callback end -->
+
+                <!-- code builder -->
+                <tr data-bind="visible:App.Editor.EditorData.Type)===('TestCase'">
+                    <td>
+                        <span>Your code:</span>
+                    </td>
+                    <td>
+                        <textarea class="CodeEditor" data-bind="value:App.Editor.EditorData.CodeContent"></textarea>
+                    </td>
+                </tr>
+                <!-- code builder end -->
             </table>
 
             <div class="Buttons">

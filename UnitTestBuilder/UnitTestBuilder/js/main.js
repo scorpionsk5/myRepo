@@ -7,7 +7,8 @@
         QUnit: 'lib/QUnit',
         underscore: 'lib/underscore-min',
         nicescroll: 'lib/nicescroll',
-        Router:'lib/router'
+        Router: 'lib/router',
+        codemirror: 'lib/codemirror'
     },
     shim: {
         'kendo': {

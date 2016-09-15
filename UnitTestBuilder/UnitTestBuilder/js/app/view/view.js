@@ -1,4 +1,4 @@
-﻿define(['app/view/templateStore', 'nicescroll'], function (templateStore) {
+﻿define(['app/view/templateStore', 'codemirror', 'nicescroll'], function (templateStore, CodeMirror) {
     var utils = {
         createElement: function (element, properties) {
             var newElement = $('<' + element + '>');
@@ -64,6 +64,9 @@
                     dragend: $.proxy(me._routeTreeWidgetEvent, me, 'dragent'),
                     select: $.proxy(me._routeTreeWidgetEvent, me, 'select')
                 }).getKendoTreeView();
+
+                //TODO: Create code mirror instance.
+                CodeMirror.fromTextArea(me.$appContainer.find('.CodeEditor')[0]);
 
                 me.initEventListeners();
             },
