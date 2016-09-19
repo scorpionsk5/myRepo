@@ -7,4 +7,4 @@
 /// <reference path="js/lib/require.js" />
 /// <reference path="js/lib/router.js" />
 /// <reference path="js/app/app.js" />
-/// <reference path="js/lib/codemirror.js" />
+/// <reference path="js/lib/codemirror/lib/codemirror.js" />
