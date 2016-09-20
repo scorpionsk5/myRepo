@@ -65,9 +65,22 @@
                     select: $.proxy(me._routeTreeWidgetEvent, me, 'select')
                 }).getKendoTreeView();
 
-                //TODO: Create code mirror instance.
+                // Create code mirror instance.
                 codeMirrorLoader(me.$appContainer.find('.CodeEditor')[0], {
-                    theme: 'midnight'
+                    theme: 'neo',
+                    onloadComplete: function () {
+                        var $codeMirror = me.$appContainer.find('.CodeMirror'),
+                            $codeConatiner = $codeMirror.find('.CodeMirror-sizer');
+                        $codeMirror.find('.CodeMirror-vscrollbar').niceScroll({
+                            cursorcolor: '#00b1ff'
+                        });
+
+                        $codeConatiner.append([utils.createElement('span', { cssClass: 'Header' }), utils.createElement('span', { cssClass: 'Footer' })]);
+                    }
+                });
+
+                me.treeViewWidget.element.niceScroll({
+                    cursorcolor: '#00b1ff'
                 });
 
                 me.initEventListeners();
@@ -128,6 +141,16 @@
                 });
 
                 return windowWidget;
+            },
+
+            setHeaderAndFooterForCodeMirror: function (argumentList) {
+                argumentList = argumentList || [];
+                var headerText = 'function(' + argumentList.join(",") + ') {',
+                    footerText = '}',
+                    $codeConatiner = this.$appContainer.find('.CodeMirror .CodeMirror-sizer');
+
+                $codeConatiner.find('.Header').text(headerText);
+                $codeConatiner.find('.Footer').text(footerText);
             }
         });
 

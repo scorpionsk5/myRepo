@@ -4,7 +4,9 @@
             BaseModel.fn.init(name);
         },
         Type: 'TestCase',
-        SubType: ''
+        SubType: '',
+        CodeContent: '// Your Code Here. \n',
+        Arguments: ['assert']
     });
 
     return TestCase;

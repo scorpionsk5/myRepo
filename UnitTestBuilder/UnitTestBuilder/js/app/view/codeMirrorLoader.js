@@ -102,6 +102,7 @@ define(['lib/codemirror/lib/codemirror'], function (CodeMirror) {
         loadBaseFiles();
         loadRequiredFiles(config).done(function () {
             CodeMirror.fromTextArea(element, config);
+            config.onloadComplete && config.onloadComplete();
         });
     };
 

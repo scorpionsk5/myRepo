@@ -1,4 +1,4 @@
-define(['app/utils'],function (utils) {
+define(['app/utils'], function (utils) {
     var EventHandlers = Object.create({
         loadPage: {
             home: function (args) {
@@ -34,6 +34,7 @@ define(['app/utils'],function (utils) {
                         vm = app.appModel.viewModel.get('App.Editor');
                     vm.set('EditMode', false);
                     vm.set('EditorData', app.appModel.createItem('TestCase'));
+                    app.appView.setHeaderAndFooterForCodeMirror(vm.get('EditorData.Arguments'));
                 },
                 addNewCallback: function (args) {
                     var app = args.app,
@@ -47,6 +48,7 @@ define(['app/utils'],function (utils) {
                     }
                     vm.set('EditMode', false);
                     vm.set('EditorData', app.appModel.createItem('Callback', '', subType));
+                    app.appView.setHeaderAndFooterForCodeMirror(vm.get('EditorData.Arguments'));
                 },
                 deleteItem: function (args) {
                     var app = args.app,
