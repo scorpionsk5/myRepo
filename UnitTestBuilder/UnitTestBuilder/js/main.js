@@ -8,7 +8,7 @@
         underscore: 'lib/underscore-min',
         nicescroll: 'lib/nicescroll',
         Router: 'lib/router',
-        codemirror: 'lib/codemirror/lib/codemirror'
+        //codemirror: 'lib/codemirror/lib/codemirror'
     },
     shim: {
         'kendo': {
@@ -16,6 +16,9 @@
         },
         'app/app': {
             deps: ['kendo']
+        },
+        'nicescroll': {
+            deps: ['jquery']
         }
     },
     waitSeconds: 0

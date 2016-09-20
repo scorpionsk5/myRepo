@@ -1,4 +1,4 @@
-﻿define(['app/view/templateStore', 'codemirror', 'nicescroll'], function (templateStore, CodeMirror) {
+﻿define(['app/view/templateStore', 'app/view/codeMirrorLoader', 'nicescroll'], function (templateStore, codeMirrorLoader) {
     var utils = {
         createElement: function (element, properties) {
             var newElement = $('<' + element + '>');
@@ -66,7 +66,9 @@
                 }).getKendoTreeView();
 
                 //TODO: Create code mirror instance.
-                CodeMirror.fromTextArea(me.$appContainer.find('.CodeEditor')[0]);
+                codeMirrorLoader(me.$appContainer.find('.CodeEditor')[0], {
+                    theme: 'midnight'
+                });
 
                 me.initEventListeners();
             },
