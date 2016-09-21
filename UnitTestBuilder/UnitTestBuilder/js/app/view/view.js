@@ -61,7 +61,7 @@
                     drag: $.proxy(me._routeTreeWidgetEvent, me, 'drag'),
                     drop: $.proxy(me._routeTreeWidgetEvent, me, 'drop'),
                     dragstart: $.proxy(me._routeTreeWidgetEvent, me, 'dragstart'),
-                    dragend: $.proxy(me._routeTreeWidgetEvent, me, 'dragent'),
+                    dragend: $.proxy(me._routeTreeWidgetEvent, me, 'dragend'),
                     select: $.proxy(me._routeTreeWidgetEvent, me, 'select')
                 }).getKendoTreeView();
 
