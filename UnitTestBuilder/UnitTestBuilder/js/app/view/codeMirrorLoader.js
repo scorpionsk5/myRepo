@@ -98,7 +98,7 @@ define(['lib/codemirror/lib/codemirror'], function (CodeMirror) {
         }
 
     CMLoader = function (element, config) {
-        config = extend(getDefaultConfig(), config || {});
+        config = extend(getDefaultConfig(), config || {}, { value: element.value });
         loadBaseFiles();
         loadRequiredFiles(config).done(function () {
             CodeMirror.fromTextArea(element, config);

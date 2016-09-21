@@ -5,7 +5,7 @@
         },
         Type: 'TestCase',
         SubType: '',
-        CodeContent: '// Your Code Here. \n',
+        CodeContent: [],
         Arguments: ['assert']
     });
 

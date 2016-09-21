@@ -70,10 +70,10 @@
                 <!-- code builder -->
                 <tr data-bind="visible:App.Editor.EditorData.Type)===('TestCase'">
                     <td>
-                        <span>Your code:</span>
+                        <span>Build your code:</span>
                     </td>
                     <td>
-                        <textarea class="CodeEditor" data-bind="value:App.Editor.EditorData.CodeContent"></textarea>
+                        <div class="CodeBuilder" data-bind="source:App.Editor.EditorData.CodeContent" data-role="listview" ></div>
                     </td>
                 </tr>
                 <!-- code builder end -->

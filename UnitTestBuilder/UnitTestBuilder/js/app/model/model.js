@@ -16,7 +16,7 @@
                         EditMode: '',
                         EditorData: {}
                     },
-                    SelectedItem:{}
+                    SelectedItem: {}
                 }
             });
         },

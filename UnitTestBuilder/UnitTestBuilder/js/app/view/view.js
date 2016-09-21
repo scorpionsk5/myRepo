@@ -53,6 +53,7 @@
 
                 me.$appContainer.append(templateStore.renderTemplate('testBuilderMainTemplate'));
                 me.$appContainer.find('.ProjectBuilderToolbar').append(templateStore.renderTemplate('projectBuilderToolbarContentTemplate'));
+                //me.$appContainer.find('.EditorTable tbody').append(templateStore.renderTemplate('functionBuilder'));
 
                 me.treeViewWidget = me.$appContainer.find('.ProjectTree').kendoTreeView({
                     template: '<span class="TreeItem #:item.Type#"><span class="TreeSprite #:item.Type#"></span>#:item.Name#</span>',
@@ -65,19 +66,19 @@
                     select: $.proxy(me._routeTreeWidgetEvent, me, 'select')
                 }).getKendoTreeView();
 
-                // Create code mirror instance.
-                codeMirrorLoader(me.$appContainer.find('.CodeEditor')[0], {
-                    theme: 'neo',
-                    onloadComplete: function () {
-                        var $codeMirror = me.$appContainer.find('.CodeMirror'),
-                            $codeConatiner = $codeMirror.find('.CodeMirror-sizer');
-                        $codeMirror.find('.CodeMirror-vscrollbar').niceScroll({
-                            cursorcolor: '#00b1ff'
-                        });
+                //// Create code mirror instance.
+                //codeMirrorLoader(me.$appContainer.find('.CodeEditor')[0], {
+                //    theme: 'neo',
+                //    onloadComplete: function () {
+                //        var $codeMirror = me.$appContainer.find('.CodeMirror'),
+                //            $codeConatiner = $codeMirror.find('.CodeMirror-sizer');
+                //        $codeMirror.find('.CodeMirror-vscrollbar').niceScroll({
+                //            cursorcolor: '#00b1ff'
+                //        });
 
-                        $codeConatiner.append([utils.createElement('span', { cssClass: 'Header' }), utils.createElement('span', { cssClass: 'Footer' })]);
-                    }
-                });
+                //        $codeConatiner.append([utils.createElement('span', { cssClass: 'Header' }), utils.createElement('span', { cssClass: 'Footer' })]);
+                //    }
+                //});
 
                 me.treeViewWidget.element.niceScroll({
                     cursorcolor: '#00b1ff'

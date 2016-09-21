@@ -1,4 +1,6 @@
-﻿html, body {
+﻿@CodeEditorStaticContent: #aaaaaa;
+
+html, body {
     height: 100%;
     background-color: rgb(0,0,0);
     margin: 0;
@@ -173,8 +175,8 @@
                                     &:first-child {
                                         max-width: 50px;
                                     }
-
-                                    .CodeMirror {
+                                    /*following code can be removed*/
+                                    /*.CodeMirror {
                                         width: 100%;
 
                                         .CodeMirror-sizer {
@@ -187,16 +189,16 @@
                                             .Header {
                                                 position: absolute;
                                                 top: 0;
-                                                color: #dfdfdf;
+                                                color: @CodeEditorStaticContent;
                                             }
 
                                             .Footer {
                                                 position: absolute;
                                                 bottom: 0;
-                                                color: #dfdfdf;
+                                                color: @CodeEditorStaticContent;
                                             }
                                         }
-                                    }
+                                    }*/
                                 }
                             }
                         }

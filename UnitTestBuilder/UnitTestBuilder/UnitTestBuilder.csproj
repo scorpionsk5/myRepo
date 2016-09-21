@@ -74,6 +74,7 @@
     <Content Include="js\app\controller\events.js" />
     <Content Include="js\app\view\codeMirrorLoader.js" />
     <Content Include="js\app\view\templates\projectBuilderToolbarContentTemplate.html" />
+    <Content Include="js\app\view\templates\functionBuilder.html" />
     <Content Include="js\lib\codemirror\addon\comment\comment.js" />
     <Content Include="js\lib\codemirror\addon\comment\continuecomment.js" />
     <Content Include="js\lib\codemirror\addon\dialog\dialog.css" />

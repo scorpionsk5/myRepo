@@ -7,7 +7,7 @@
         Type: 'Callback',
         SubType: '',
         CallbackName: '',
-        CodeContent: '// Your Code Here. \n',
+        CodeContent: [],
         Arguments: []
     });
 
