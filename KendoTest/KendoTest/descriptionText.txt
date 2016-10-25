@@ -1,0 +1,15 @@
+﻿{
+  "_CommonDescriptions": {
+    "_Description": "Description",
+    "_DataType": "DataType",
+    "_InnerFields": "Inner Fields",
+    "_AvailableOptions": "Available Options",
+    "_Arguments": "Arguments",
+    "EnterpriseManager": "Enterprise Manager"
+  },
+  "EnterpriseManager": {
+    "DNAConfiguration": "DNA Configuration",
+    "ImportantMethodsInEM": "Important Methods In EM",
+    "WidgetConfigurations": "Widget Configurations"
+  }
+}
