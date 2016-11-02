@@ -79,7 +79,7 @@
     <Content Include="HtmlPage.html" />
     <Content Include="JavaScript.js" />
     <Content Include="jquery-2.2.2.min.js" />
-    <Content Include="kendo.all.min.js" />
+    <Content Include="kendo.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

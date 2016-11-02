@@ -3,9 +3,6 @@ $(document).ready(function () {
     widget = $('#test1').kendoExtendedTreeView({
         dataSource: {
             data: data
-        },
-        select: function (e) {
-            debugger
         }
     }).getKendoExtendedTreeView();
 });
@@ -20,20 +17,28 @@ $(document).ready(function () {
 
 
 var extendedTreeView = kendo.ui.TreeView.extend({
-    options: { name: 'ExtendedTreeView' },
+    options: {
+        name: 'ExtendedTreeView'
+    },
+    init: function (element, options) {
+        options.loadOnDemand = false;   // Force loadOnDemand to be false always. this is necessary for extended filter to work.
+        kendo.ui.TreeView.fn.init.call(this, element, options);
+    },
     filterEx: function (value, property, levelTill) {
-
         var me = this,
             dataItems = me.dataItems();
 
         property = property || me.options.dataTextField.toString();
 
-        this._hideAll();
+        me._hideAll();
         if (value) {
-            this._extendedFilter(dataItems, value.toLowerCase(), property, levelTill);
+            me.expand('.k-item');
+            me._extendedFilter(dataItems, value.toLowerCase(), property, levelTill);
         }
         else {
             me.clearFilter();
+            me.collapse('.k-item');
+            me.expand('.k-item:first-child');
         };
     },
     _extendedFilter: function (dataArray, value, property, levelTill) {
@@ -41,14 +46,13 @@ var extendedTreeView = kendo.ui.TreeView.extend({
             itemsFound = [];
 
         $.each(dataArray, function () {
-            if (!this.items) debugger;  // bug
-            if (this.items.length && (isNaN(levelTill) ? 1 : (this.level <= levelTill))) {
-                me._extendedFilter(this.items, value, property, levelTill);
-            };
-
             if (this[property].toLowerCase().indexOf(value) == 0) {
                 itemsFound.push(me.findByUid(this.uid));
             };
+
+            if (this.items && this.items.length && (isNaN(levelTill) ? 1 : (this.level() <= levelTill))) {
+                me._extendedFilter(this.items, value, property, levelTill);
+            };  //TODO: Implement logic for levelTill.
         });
 
         itemsFound.forEach(function ($item) {
