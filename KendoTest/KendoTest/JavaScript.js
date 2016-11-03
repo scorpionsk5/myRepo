@@ -1,34 +1,19 @@
-﻿var widget = null;
-$(document).ready(function () {
-    widget = $('#test1').kendoExtendedTreeView({
-        dataSource: {
-            data: data
-        }
-    }).getKendoExtendedTreeView();
-});
-
-
-//var vm = kendo.observable({
-//    //App: [{ text: 't1' }, { text: 't2', items: [{ text: 't2a' }] }, { text: 't3', items: [{ text: 't3a' }] }, { text: 't4' }]
-//    App: data
-//});
-
-//kendo.bind($('body'), vm);
-
-
-var extendedTreeView = kendo.ui.TreeView.extend({
+﻿// Extending tree view widget.
+var treeViewWithFilter = kendo.ui.TreeView.extend({
     options: {
-        name: 'ExtendedTreeView'
+        name: 'TreeViewWithFilter'
     },
     init: function (element, options) {
-        options.loadOnDemand = false;   // Force loadOnDemand to be false always. this is necessary for extended filter to work.
+        options.loadOnDemand = false;   // Force loadOnDemand to be false always. this is necessary for filter to work.
         kendo.ui.TreeView.fn.init.call(this, element, options);
     },
     filterEx: function (value, property, levelTill) {
         var me = this,
             dataItems = me.dataItems();
 
+        !isNaN(property) && typeof levelTill === 'undefined' && (levelTill = property, property = window.undefined);
         property = property || me.options.dataTextField.toString();
+        levelTill = parseInt(levelTill) || 1000;
 
         me._hideAll();
         if (value) {
@@ -36,9 +21,10 @@ var extendedTreeView = kendo.ui.TreeView.extend({
             me._extendedFilter(dataItems, value.toLowerCase(), property, levelTill);
         }
         else {
-            me.clearFilter();
+            me._clearFilter();
             me.collapse('.k-item');
-            me.expand('.k-item:first-child');
+            // Uncomment the below line to expand after clearing filter.
+            //me.expand('.k-item:first-child');
         };
     },
     _extendedFilter: function (dataArray, value, property, levelTill) {
@@ -47,12 +33,16 @@ var extendedTreeView = kendo.ui.TreeView.extend({
 
         $.each(dataArray, function () {
             if (this[property].toLowerCase().indexOf(value) == 0) {
-                itemsFound.push(me.findByUid(this.uid));
+                var $item = me.findByUid(this.uid);
+                itemsFound.push($item);
+                if (this.level() == levelTill) {
+                    $item.find('.k-item').show();
+                };
             };
 
-            if (this.items && this.items.length && (isNaN(levelTill) ? 1 : (this.level() <= levelTill))) {
+            if (this.items && this.items.length && (this.level() <= levelTill)) {
                 me._extendedFilter(this.items, value, property, levelTill);
-            };  //TODO: Implement logic for levelTill.
+            };
         });
 
         itemsFound.forEach(function ($item) {
@@ -60,22 +50,39 @@ var extendedTreeView = kendo.ui.TreeView.extend({
             $item.parentsUntil(me.element).show();
         });
     },
-    clearFilter: function () {
-        this.element.find('[data-uid]').show();
+    _clearFilter: function () {
+        this.element.find('.k-item').show();
     },
     _hideAll: function () {
-        this.element.find('[data-uid]').hide();
+        this.element.find('.k-item').hide();
     }
 });
 
-kendo.ui.plugin(extendedTreeView);
+// Register new plugin.
+kendo.ui.plugin(treeViewWithFilter);
 
-$('#searchButton').on('click', function (e) {
+// Test new widget.
+var widget = null;
+$(document).ready(function () {
+    // Example to use.
+    widget = $('#test1').kendoTreeViewWithFilter({
+        dataSource: {
+            data: data
+        }
+    }).getKendoTreeViewWithFilter();
+});
+
+var searchHandler = function (e) {
     if (!widget) return;
 
     var value = $('#searchBox').val();
-    widget.filterEx(value);
+    widget.filterEx(value, 'text', 4);
 
+};
+
+$('#searchButton').on('click', searchHandler);
+$('#searchBox').on('keyup', function (e) {
+    (e.keyCode == 13) && searchHandler(e);
 });
 
 
