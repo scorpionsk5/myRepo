@@ -1,4 +1,4 @@
-﻿// Extending tree view widget.
+﻿// Extending tree view widget new filtering method.
 var treeViewWithFilter = kendo.ui.TreeView.extend({
     options: {
         name: 'TreeViewWithFilter'
