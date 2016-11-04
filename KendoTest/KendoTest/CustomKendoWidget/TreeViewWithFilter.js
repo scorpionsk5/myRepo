@@ -77,7 +77,7 @@ var searchHandler = function (e) {
     if (!widget) return;
 
     var value = $('#searchBox').val();
-    widget.filterEx(value, 'text', 4);
+    widget.filterEx(value);
 
 };
 
