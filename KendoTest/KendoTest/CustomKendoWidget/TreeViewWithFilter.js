@@ -1,4 +1,4 @@
-﻿// Extending tree view widget new filtering method.
+﻿// Extending tree view widget with filtering method.
 var treeViewWithFilter = kendo.ui.TreeView.extend({
     options: {
         name: 'TreeViewWithFilter'
@@ -15,46 +15,45 @@ var treeViewWithFilter = kendo.ui.TreeView.extend({
         property = property || me.options.dataTextField.toString();
         levelTill = parseInt(levelTill) || 1000;
 
-        me._hideAll();
         if (value) {
+            me._hideAll();
             me.expand('.k-item');
             me._extendedFilter(dataItems, value.toLowerCase(), property, levelTill);
         }
         else {
-            me._clearFilter();
-            me.collapse('.k-item');
-            // Uncomment the below line to expand after clearing filter.
+            me.clearFilter();
+            // Uncomment the below line to collapse all items after clearing filter.
+            //me.collapse('.k-item');
+            // Uncomment the below line to expand first child items after clearing filter.
             //me.expand('.k-item:first-child');
         };
     },
     _extendedFilter: function (dataArray, value, property, levelTill) {
-        var me = this,
-            itemsFound = [];
+        var me = this;
 
         $.each(dataArray, function () {
             if (this[property].toLowerCase().indexOf(value) == 0) {
                 var $item = me.findByUid(this.uid);
-                itemsFound.push($item);
+
+                $item.parentsUntil(me.element).show();
+                $item.show();
+
                 if (this.level() == levelTill) {
-                    $item.find('.k-item').show();
+                    $item.find('.k-item, .k-group').show();
+                    me.collapse($item);
                 };
             };
 
-            if (this.items && this.items.length && (this.level() <= levelTill)) {
+            if (this.items && this.items.length && (this.level() < levelTill)) {
                 me._extendedFilter(this.items, value, property, levelTill);
             };
         });
-
-        itemsFound.forEach(function ($item) {
-            $item.show();
-            $item.parentsUntil(me.element).show();
-        });
     },
-    _clearFilter: function () {
-        this.element.find('.k-item').show();
+    clearFilter: function () {
+        this.element.find('.k-item, .k-group').show();
     },
     _hideAll: function () {
-        this.element.find('.k-item').hide();
+        this.element.find('.k-item, .k-group').hide();
     }
 });
 
@@ -77,7 +76,7 @@ var searchHandler = function (e) {
     if (!widget) return;
 
     var value = $('#searchBox').val();
-    widget.filterEx(value);
+    widget.filterEx(value, 3);
 
 };
 
