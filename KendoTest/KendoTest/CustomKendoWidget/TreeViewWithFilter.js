@@ -7,7 +7,7 @@ var treeViewWithFilter = kendo.ui.TreeView.extend({
         options.loadOnDemand = false;   // Force loadOnDemand to be false always. This is necessary for filter to work.
         kendo.ui.TreeView.fn.init.call(this, element, options);
     },
-    filterEx: function (value, property, levelTill) {
+    filterEx: function (value, property, levelTill) {   //TODO: Bug - expand toggles when levelTill is defined.
         var me = this,
             dataItems = me.dataItems();
 
@@ -32,19 +32,21 @@ var treeViewWithFilter = kendo.ui.TreeView.extend({
         var me = this;
 
         $.each(dataArray, function () {
+            var level = this.level();
+
             if (this[property].toLowerCase().indexOf(value) == 0) {
                 var $item = me.findByUid(this.uid);
 
                 $item.parentsUntil(me.element).show();
                 $item.show();
 
-                if (this.level() == levelTill) {
+                if (level == levelTill) {
                     $item.find('.k-item, .k-group').show();
                     me.collapse($item);
                 };
             };
 
-            if (this.items && this.items.length && (this.level() < levelTill)) {
+            if (this.items && this.items.length && (level < levelTill)) {
                 me._extendedFilter(this.items, value, property, levelTill);
             };
         });
